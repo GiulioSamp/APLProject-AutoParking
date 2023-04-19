@@ -1,10 +1,12 @@
 UC1 Richiesta parcheggio:
 1.L'utente seleziona "richiesta parcheggio" dal terminale
-2.Il sistema richiede l'inserimento dei dati dell'utente e del suo veicolo
-3.L'utente fornisce i dati richiesti
-4.Il sistema chiede conferma dei dati inseriti con possibilità di modifica (ritorno al punto 3)
-5.L'utente conferma i dati immessi
-6.Il sistema crea un istanza VeicoloParcheggiato v che contiene la data dell'inizio del parcheggio e i dati immessi dall'utente e stampa un ticket con codice univoco
+2A.Il sistema verifica la presenza di un posto libero all'interno del parcheggio.
+	3A.Il sistema richiede l'inserimento dei dati dell'utente e del suo veicolo
+	4A.L'utente fornisce i dati richiesti
+	5A.Il sistema chiede conferma dei dati inseriti con possibilità di modifica (ritorno al punto 3)
+	6A.L'utente conferma i dati immessi
+	7A.Il sistema crea un istanza VeicoloParcheggiato v che contiene la data dell'inizio del parcheggio e i dati immessi dall'utente e stampa un ticket con codice univoco
+2B.Il sistema notifica l'utente che il parcheggio è pieno.
 
 UC2 Ritiro auto:
 1.L'utente seleziona "ritiro auto" dal terminale
