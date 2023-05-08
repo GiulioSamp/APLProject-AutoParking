@@ -1,39 +1,68 @@
 UC1 Richiesta parcheggio:
-1.L'utente seleziona "richiesta parcheggio" dal terminale
+1.L'utente seleziona "richiesta parcheggio" dal terminale.
 2A.Il sistema verifica la presenza di un posto libero all'interno del parcheggio.
-	3A.Il sistema richiede l'inserimento dei dati dell'utente e del suo veicolo
-	4A.L'utente fornisce i dati richiesti
-	5A.Il sistema chiede conferma dei dati inseriti con possibilità di modifica (ritorno al punto 3)
-	6A.L'utente conferma i dati immessi
-	7A.Il sistema crea un istanza VeicoloParcheggiato v che contiene la data dell'inizio del parcheggio e i dati immessi dall'utente e stampa un ticket con codice univoco
+	3A.Il sistema richiede l'inserimento dei dati dell'utente e del suo veicolo.
+	4A.L'utente fornisce i dati richiesti.
+	5A.Il sistema chiede conferma dei dati inseriti con possibilità di modifica (ritorno al punto 3).
+	6A.L'utente conferma i dati immessi.
+	7A.Il sistema crea un istanza VeicoloParcheggiato v che contiene la data dell'inizio del parcheggio e i dati immessi dall'utente e stampa un ticket con codice univoco.
 2B. Il sistema notifica l'utente che il parcheggio è pieno.
 
 UC2 Ritiro auto:
-1.L'utente seleziona "ritiro auto" dal terminale
-2.Il terminale richiede l'inserimento del codice univoco del ticket del parcheggio
-3.L'utente inserisce il codice univoco del ticket
-4A.Il terminale restituisce il prezzo del ritiro calcolato tramite il tempo di inizio e di fine parcheggio
-	5A-A.L'utente paga la tariffa
-	6A-A.Il sistema accetta il pagamento e recupera il veicolo dell'utente.
-4B.Il sistema non riconosce il codice e stampa un errore su terminale(ritorno al passo 2)
+1.L'utente seleziona "ritiro auto" dal terminale.
+2.Il terminale richiede l'inserimento del codice univoco del ticket del parcheggio.
+3.L'utente inserisce il codice univoco del ticket.
+4.Il terminale restituisce il prezzo del ritiro calcolato tramite il tempo di inizio e di fine parcheggio.
+5.L'utente paga la tariffa.
+6.Il sistema accetta il pagamento e recupera il veicolo dell'utente.
+	4A.Il sistema non riconosce il codice e stampa un errore su terminale(ritorno al passo 2).
 
-UC3 Controllo amministratore:
-1.L'amministratore accede al sistema tramite un client apposito
-2.Il sistema restituisce un menù testuale con varie opzioni di controllo
-3A.L'amministratore sceglie l'opzione "Posti Occupati"
-	4A.Il sistema stampa il numero di posti occupati su numero di posti liberi.(ritorno al passo 2)
-3B.L'amministratore sceglie l'opzione "Posti Occupati per piano"
-	4B.Il sistema chiede all'amministratore di specificare il piano
-	5B.L'amministratore inserisce il piano desiderato
-	6B.Il sistema stampa il numero di posti occupati su numero di posti liberi del piano specificato.(ritorno al passo 2)
-3C.L'amministratore sceglie l'opzione "Chiudi parcheggio"
-	4C.Il sistema controlla se sono presenti posti occupati.
-		5C-A.Il sistema verifica che il parcheggio è vuoto e blocca l'uso del terminale per eventuali utenti e notifica l'amministratore del buon esito dell'operazione.
-		5C-B.Il sistema notifica l'amministratore che il parcheggio non è vuoto e non può essere chiuso.
-3D.L'amministratore sceglie l'opzione "Apri parcheggio"
-	4D.Il sistema sblocca l'uso del terminale e notifica l'amministratore del buon esito dell'operazione
-3E.L'amministratore sceglie l'opzione "Visualizza incasso giornaliero"
-	4E. Il sistema somma gli incassi delle ultime 24 ore e stampa il risultato.
+UC3 Controllo posti occupati in tutti i piani:
+1.L'amministratore accede al sistema tramite un client apposito.
+2.Il sistema restituisce un menù testuale con varie opzioni di controllo.
+3.L'amministratore sceglie l'opzione "Posti Occupati".
+4.Il sistema stampa il numero di posti occupati su numero di posti liberi.(ritorno al passo 2).
+
+UC4: Controllo posti occupati per piano:
+1.L'amministratore accede al sistema tramite un client apposito.
+2.Il sistema restituisce un menù testuale con varie opzioni di controllo.
+3.L'amministratore sceglie l'opzione "Posti Occupati per piano".
+4.Il sistema chiede all'amministratore di specificare il piano.
+5.L'amministratore inserisce il piano desiderato.
+6.Il sistema stampa il numero di posti occupati su numero di posti liberi del piano specificato.(ritorno al passo 2).
+	5A.Il sistema non trova il piano specificato e restituisce un errore(ritorno al passo 4).
+
+UC5: Chiudi parcheggio:
+1.L'amministratore accede al sistema tramite un client apposito.
+2.Il sistema restituisce un menù testuale con varie opzioni di controllo.
+3.L'amministratore sceglie l'opzione "Chiudi parcheggio".
+4.Il sistema controlla se sono presenti posti occupati.
+5.Il sistema verifica che il parcheggio è vuoto e blocca l'uso del terminale per eventuali utenti e notifica l'amministratore del buon esito dell'operazione.
+	5A.Il sistema notifica l'amministratore che il parcheggio non è vuoto e non può essere chiuso(ritorno al passo 2).
+		
+UC6 Apri parcheggio:
+1.L'amministratore accede al sistema tramite un client apposito.
+2.Il sistema restituisce un menù testuale con varie opzioni di controllo.
+3.L'amministratore sceglie l'opzione "Apri parcheggio".
+4.Il sistema sblocca l'uso del terminale e notifica l'amministratore del buon esito dell'operazione.
+
+UC7 Controlla incassi:
+1.L'amministratore accede al sistema tramite un client apposito.
+2.Il sistema restituisce un menù testuale con varie opzioni di controllo.
+3.L'amministratore sceglie l'opzione "Visualizza incasso giornaliero".
+4.Il sistema chiede l'inserimento di una data.
+5.L'amministratore inserisce la data di cui vuole vedere gli incassi.
+6.Il sistema somma gli incassi del giorno indicato e stampa il risultato.
+
+UC8 Modifica tariffa fissa:
+1.L'amministratore accede al sistema tramite un client apposito.
+2.Il sistema restituisce un menù testuale con varie opzioni di controllo.
+3.L'amministratore sceglie l'opzione "Modifica tariffa fissa".
+4.Il sistema chiede l'inserimento di un valore numerico unsigned double.
+5.L'amministratore inserisce il nuovo importo della tariffa.
+6.Il sistema modifica la tariffa e notifica l'amministratore dell'avvenuta modifica.
+	6A.Il sistema non riconosce il valore inserito come valore valido (inserimento di lettere o numeri negativi).
+
 	
 
 
