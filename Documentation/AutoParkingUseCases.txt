@@ -33,7 +33,7 @@ UC3 Controllo amministratore:
 3D.L'amministratore sceglie l'opzione "Apri parcheggio"
 	4D.Il sistema sblocca l'uso del terminale e notifica l'amministratore del buon esito dell'operazione
 3E.L'amministratore sceglie l'opzione "Visualizza incasso giornaliero"
-	4E. Il sistema somma gli incassi delle utile 24 ore e stampa il risultato.
+	4E. Il sistema somma gli incassi delle ultime 24 ore e stampa il risultato.
 	
 ##Manutenzione e gestione degli allarmi: il sistema deve segnalare eventuali malfunzionamenti o guasti tecnici, ad esempio una barriera che non si apre o un sensore che non funziona correttamente. Inoltre, deve gestire eventuali allarmi, ad esempio in caso di incendio o emergenza medica.
 
