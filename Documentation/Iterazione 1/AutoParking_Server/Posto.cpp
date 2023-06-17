@@ -4,7 +4,14 @@
 Posto::Posto(int n) {
 	num_posto = n;
 	stato = true;
+#ifdef _DEBUG
 	std::cout << "Posto num." << n << " creato con stato: " << stato << std::endl;
+#endif
+}
+
+Posto::~Posto() {
+	num_posto = NULL;
+	stato = NULL;
 }
 
 void Posto::stampa() {
@@ -31,4 +38,8 @@ void Posto::liberaPosto() {
 	else {
 		std::cout << "Posto già libero!" << std::endl;
 	}
+}
+
+bool Posto::getStato() {
+	return stato;
 }
