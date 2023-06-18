@@ -15,9 +15,7 @@ Piano::Piano(int n, int m) {
 	num_piano = n;
 	posti_liberi = m;
 	for (int i = 0; i < m; i++) {
-		Posto &push = *(new Posto(i));
-		posti.push_back(push);
-		delete &push;
+	posti.push_back(*(new Posto(i)));	
 	}
 }
 
@@ -33,6 +31,19 @@ void Piano::occupaPosto() {
 		if (posti[i].Posto::getStato() == 1) {
 			posti[i].Posto::occupaPosto();
 			posti_liberi--;
+			break;
+		}
+		else {
+			i++;
+		}
+	}
+}
+
+void Piano::liberaPosto() {
+	for (int i = 0; i < posti.size(); i++) {
+		if (posti[i].Posto::getStato() == 0) {
+			posti[i].Posto::liberaPosto();
+			posti_liberi++;
 			break;
 		}
 		else {

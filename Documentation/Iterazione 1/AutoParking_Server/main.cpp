@@ -6,6 +6,8 @@ int main(){
 	p.stampa();
 	p.occupaPosto();
 	p.stampa();
+	p.liberaPosto();
+	p.stampa();
 	delete &p;
 	return 0;
 }
