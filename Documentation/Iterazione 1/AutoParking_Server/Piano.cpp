@@ -28,30 +28,34 @@ Piano::~Piano() {
 
 void Piano::occupaPosto() {
 	for (int i = 0; i < posti.size(); i++) {
-		if (posti[i].Posto::getStato() == 1) {
-			posti[i].Posto::occupaPosto();
-			posti_liberi--;
-			break;
+		try {
+			if (posti[i].Posto::getStato() == 1) {
+				posti[i].Posto::occupaPosto();
+				posti_liberi--;
+				std::cout << "Posto n." << i << " occupato!" << std::endl;
+				break;
+			}
+			else {
+				i++;
+			}
 		}
-		else {
-			i++;
-		}
-	}
-}
-
-void Piano::liberaPosto() {
-	for (int i = 0; i < posti.size(); i++) {
-		if (posti[i].Posto::getStato() == 0) {
-			posti[i].Posto::liberaPosto();
-			posti_liberi++;
-			break;
-		}
-		else {
-			i++;
+		catch (std::logic_error e) {
+			std::cout << e.what() << std::endl;
 		}
 	}
 }
 
-std::string Piano::sizeofPosti(){
-	return std::to_string(posti.size());
+void Piano::liberaPosto(int num_posto) {
+	try {
+		posti[num_posto].liberaPosto();
+		std::cout << "Posto n." << num_posto << " liberato!" << std::endl;
+		posti_liberi++;
+	}
+	catch (std::logic_error e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+
+int Piano::sizeofPosti(){
+	return int(posti.size());
 }

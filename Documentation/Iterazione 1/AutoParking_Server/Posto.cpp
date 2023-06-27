@@ -1,6 +1,6 @@
 #include "Posto.h"
 #include <iostream>
-
+#include <exception>
 Posto::Posto(int n) {
 	num_posto = n;
 	stato = true;
@@ -23,21 +23,21 @@ void Posto::stampa() {
 }
 
 void Posto::occupaPosto() {
-	if (stato == 1) {
+	if (stato == true) {
 		stato = false;
 	}
 	else {
-		std::cout << "Errore: posto già occupato" << std::endl;
+		throw std::logic_error("ERRORE: Posto gia' occupato!");
 	}
 }
 
 void Posto::liberaPosto() {
-	if (stato == 0) {
-		stato = true;
-	}
-	else {
-		std::cout << "Posto già libero!" << std::endl;
-	}
+		if (stato == false) {
+			stato = true;
+		}
+		else {
+			throw std::logic_error("ERRORE: Posto gia' libero!");
+		}
 }
 
 bool Posto::getStato() {

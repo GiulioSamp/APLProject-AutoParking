@@ -21,6 +21,12 @@
     <ClInclude Include="Piano.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Parcheggio.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Downloads\crow_all.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Posto.cpp">
@@ -30,6 +36,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Piano.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Parcheggio.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

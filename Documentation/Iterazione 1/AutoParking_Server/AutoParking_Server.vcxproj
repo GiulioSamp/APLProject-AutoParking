@@ -116,22 +116,29 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>STATIC_CONCPP;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Giuli\Documents\Visual Studio 2022\External Libraries\boost_1_78_0;C:\Users\Giuli\Documents\Visual Studio 2022\External Libraries\mysql-connector-c++-8.0.33-winx64\include\jdbc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Giuli\Documents\Visual Studio 2022\External Libraries\boost_1_78_0\stage\lib;C:\Users\Giuli\Documents\Visual Studio 2022\External Libraries\mysql-connector-c++-8.0.33-winx64\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\crow_all.h" />
+    <ClInclude Include="Parcheggio.h" />
     <ClInclude Include="Piano.h" />
     <ClInclude Include="Posto.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Parcheggio.cpp" />
     <ClCompile Include="Piano.cpp" />
     <ClCompile Include="Posto.cpp" />
   </ItemGroup>

@@ -1,2 +1,6 @@
-﻿  Piano.cpp
-  AutoParking_Server.vcxproj -> C:\Users\auror\Source\Repos\APLProject-AutoParking\Documentation\Iterazione 1\AutoParking_Server\x64\Debug\AutoParking_Server.exe
+﻿  Parcheggio.cpp
+  Piano.cpp
+  Posto.cpp
+  main.cpp
+C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(6,10): fatal  error C1083: Non è possibile aprire il file inclusione: 'mysql_connection.h': No such file or directory
+  Generazione del codice in corso...

@@ -12,6 +12,6 @@ public:
 	~Piano();
 	void stampa();
 	void occupaPosto();
-	void liberaPosto();
-	std::string sizeofPosti();
+	void liberaPosto(int);
+	int sizeofPosti();
 };
