@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\auror\\source\\repos\\ParkingUser\\ParkingClient.csproj",
+      "projectUniqueName": "C:\\Users\\auror\\source\\repos\\ParkingClient\\ParkingClient.csproj",
       "projectName": "ParkingClient",
-      "projectPath": "C:\\Users\\auror\\source\\repos\\ParkingUser\\ParkingClient.csproj",
+      "projectPath": "C:\\Users\\auror\\source\\repos\\ParkingClient\\ParkingClient.csproj",
       "packagesPath": "C:\\Users\\auror\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\auror\\source\\repos\\ParkingUser\\obj\\",
+      "outputPath": "C:\\Users\\auror\\source\\repos\\ParkingClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

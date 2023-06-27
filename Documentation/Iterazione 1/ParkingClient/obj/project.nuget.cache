@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yyCSCXCNVUNE0TNAYJtBZEGKQEn06EghPvxkgWD8ExCpagJcIUnCy0dFAvb3wIRbyurw5wvI3KS2zfZ8px5OZA==",
+  "dgSpecHash": "xJz1Yc8tmTbNZjQsZSnRjWSPpf9NUtPDB0BRHlw21yCdECZG/hYOxl/pwfVdyjMGlzCNeX4QcK+uXbyzehDIeQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\auror\\source\\repos\\ParkingUser\\ParkingClient.csproj",
+  "projectFilePath": "C:\\Users\\auror\\source\\repos\\ParkingClient\\ParkingClient.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

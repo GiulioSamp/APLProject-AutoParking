@@ -6,117 +6,86 @@ using System.Threading.Tasks;
 //per rest api HTTP POST
 using System.Net.Http;
 using System.Text.Json;
+using Microsoft.VisualBasic;
+using ParkingClient;
+using System.Net.Sockets;
 
-namespace ParkingUser
+namespace ParkingClient
 {
-    //internal
+    
     public class Utente
     {
-        public string Nome { get;set; }
+        public string Nome { get; set; }
         public string Cognome { get; set; }
         public string NumeroTelefono { get; set; }
         public string Email { get; set; }
-
-        public Utente(string nome, string cognome, string numeroTelefono, string email)
+        public string Password { get; set; }
+       
+        
+        public Utente(string nome, string cognome, string numeroTelefono, string email, string password)
         {
             Nome = nome;
             Cognome = cognome;
             NumeroTelefono = numeroTelefono;
             Email = email;
+            Password = password;
         }
         public Utente() { } //serve   
 
-        public void InserisciUtente()
+        /// <summary>
+        /// RegistrazioneUtente
+        /// </summary>
+
+         #region public
+        public void RegistrazioneUtente()
         {
-            Console.WriteLine("\nInserisci i dati utente:");
+            Console.WriteLine("\nInserisci i dati utente per procedere con la registrazione");
             try
             {
-                Console.Write("Nome: ");
-                Nome= Console.ReadLine();
-                
-                Console.Write("Cognome: ");
-                // string cognome = Console.ReadLine();
-                Cognome = Console.ReadLine();
-                bool numeroValido = false;
-                while (!numeroValido)
+               Nome = CheckInput("Inserisci il nome: ", input =>
                 {
-                    Console.Write("Inserisci il numero di telefono: ");
-                    NumeroTelefono = Console.ReadLine();
+                    return !string.IsNullOrWhiteSpace(input);
+                });
+ 
+               Cognome= CheckInput("Inserisci il cognome: ", input =>
+               {
+                   return !string.IsNullOrWhiteSpace(input);
+               });
+               
+                Password = CheckInput("Inserisci la password: ", input =>
+                {
+                    return !string.IsNullOrWhiteSpace(input);
+                });
 
-                    if (ContieneNumeri(NumeroTelefono))
-                    {
-                        numeroValido = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Il numero di telefono deve contenere almeno numeri. Riprova.");
-                    }
-                }
-                Console.Write("Email: ");
-                Email = Console.ReadLine();
-                Console.WriteLine("Dati inseriti correttamente\n");
-                if (!Email.Contains("@"))
-                {
-                    throw new Exception("L'email deve contenere il simbolo '@'.");
-                }
-                
-               // return new Utente(nome, cognome, numeroTelefono, email);
+                NumeroTelefono = CheckInput("Inserisci il nuovo numero di telefono: ", input =>
+               {
+                    return int.TryParse(input, out _);
+               });
+
+               Email = CheckInput("Inserisci l'indirizzo email: ", EmailCheck);
+
             }
             catch (Exception ex)
             {
-                while (!Email.Contains("@"))
-                {
                     Console.WriteLine($"Errore: {ex.Message}");
-                    //return null;
-                    Console.Write("Email: ");
-                    Email = Console.ReadLine();
-                }
-                
-            }
-            
-        }
-        /*INSERIMEN VOID per case uguali
-          public static void InserisciUtente()
-          {
-        try
-        {
-            Console.Write("Nome: ");
-            string nome = Console.ReadLine();
-            Console.Write("Cognome: ");
-            string cognome = Console.ReadLine();
-            Console.Write("Numero di telefono: ");
-            string numeroTelefono = Console.ReadLine();
-            Console.Write("Email: ");
-            string email = Console.ReadLine();
-
-            if (!email.Contains("@"))
-            {
-                throw new Exception("L'email deve contenere il simbolo '@'.");
             }
 
-            Persona persona = new Persona(nome, cognome, numeroTelefono, email);
-            Console.WriteLine("Persona inserita correttamente.");
         }
-        catch (Exception ex)
+        
+        public bool IsUtenteInserito()
         {
-            Console.WriteLine($"Errore: {ex.Message}");
-        }
-    }*/
-
-        private bool ContieneNumeri(string input)
-        {
-            foreach (char carattere in input)
-            {
-                if (char.IsDigit(carattere))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return !string.IsNullOrWhiteSpace(Nome)
+                && !string.IsNullOrWhiteSpace(Cognome)
+                && !string.IsNullOrWhiteSpace(NumeroTelefono)
+                && !string.IsNullOrWhiteSpace(Email)
+                && !string.IsNullOrWhiteSpace(Password);
         }
 
+
+        
         public void ModificaUtente()
         {
+            //
             try
             {
                 if (Nome == null)
@@ -126,25 +95,37 @@ namespace ParkingUser
                 }
                 Console.WriteLine("\nModifica i dati inseriti precedentemente:");
                 //Console.WriteLine($"Modifica dei dati di {persona.Nome} {persona.Cognome}:");
-
-                Console.Write("Nome attuale: {0} inserisci nuovo nome: ", Nome);
-                string nuovoNome = Console.ReadLine();
-                Console.Write("Cognome attuale: {0} inserisci nuovo cognome: ", Cognome);
-                string nuovoCognome = Console.ReadLine();
-                Console.Write("Numero di telefono attuale {0} inserisci nuovo numero di telefono: ", NumeroTelefono);
-                string nuovoNumeroTelefono = Console.ReadLine();
-                Console.Write("E-mai attuale {0}, inserisci nuova email: ", Email);
-                string nuovaEmail = Console.ReadLine();
-
-                if (!nuovaEmail.Contains("@"))
+                Console.Write("Nome attuale: {0}", Nome);
+                string nuovoNome = CheckInput("Inserisci il nuovo nome: ", input =>
                 {
-                    throw new Exception("L'email deve contenere il simbolo '@'.");
-                }
+                    return !string.IsNullOrWhiteSpace(input);
+                });
+                Console.Write("Cognome attuale: {0}", Cognome);
+                string nuovoCognome = CheckInput("Inserisci il nuovo cognome: ", input =>
+                {
+                    return !string.IsNullOrWhiteSpace(input);
+                });
+
+                string nuovaPassword = CheckInput("Inserisci la nuova password: ", input =>
+                {
+                    return !string.IsNullOrWhiteSpace(input);
+                });
+
+                string nuovoNumeroTelefono = CheckInput("Inserisci il nuovo numero di telefono: ", input =>
+                {
+                    return int.TryParse(input, out _);
+                });
+
+                NumeroTelefono = nuovoNumeroTelefono;
+                Console.WriteLine("Numero di telefono modificato con successo.");
+                Console.Write("Indirizzo e-mail attuale {0}", Email);
+                string nuovaEmail = CheckInput("Inserisci l'indirizzo email: ", EmailCheck);
 
                 // Aggiornamento dei dati della persona
                 Nome = nuovoNome;
                 Cognome = nuovoCognome;
-                NumeroTelefono = nuovoNumeroTelefono;
+                Password = nuovaPassword;
+                //NumeroTelefono = nuovoNumeroTelefono;
                 Email = nuovaEmail;
 
                 Console.WriteLine("\nDati del utente modificati con successo.\n");
@@ -177,43 +158,103 @@ namespace ParkingUser
 
         }
 
-        public void InviaDatiAlServer(string url)
-        { //da approfondire doc
-            using (HttpClient client = new HttpClient())
-            {
-                // Creazione dell'oggetto Utente con i dati dell'utente da inviare
-                //Utente p = new Utente { Nome = nome, Cognome = cognome, Telefono = telefono };
+        public void EffettuaLogin()
+        {
+            Console.WriteLine("Effettua il login");
 
-                // Serializza l'oggetto UtenteDto in formato JSON
-                string jsonData = JsonSerializer.Serialize(this);
+            Console.Write("Nome utente: ");
+            string nomeUtente = Console.ReadLine();
 
-                // Crea il contenuto della richiesta HTTP
-                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
 
-                // Invia la richiesta POST al server
-                HttpResponseMessage response = client.PostAsync(url, content).Result;
+            // Aggiungi qui la logica per verificare le credenziali e restituire l'oggetto Utente corrispondente
+            // In caso di credenziali valide, restituisci l'oggetto Utente
+            // In caso di credenziali non valide, restituisci null
 
-                // Verifica lo stato della risposta
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine("Dati utente inviati con successo al server.");
-                }
-                else
-                {
-                    Console.WriteLine("Errore durante l'invio dei dati utente al server. Codice di stato: " + response.StatusCode);
-                }
-            }
+            //if (nomeUtente == vedi come fare && password ==  idem un check serve)
+            //{
+              //  return new Utente(nomeUtente, password);
+            //}
+
+//            return null;
         }
+        //bozza uguale nelle due classi BOZZA 
+      
+        public void InviaDati()
+        { 
+            string ServerAddress = "127.0.0.1";
+          int ServerPort = 12345;
+            try
+            {
+                TcpClient client = new TcpClient(ServerAddress, ServerPort);
+                NetworkStream stream = client.GetStream();
+
+                // Creazione e invio dell'oggetto Utente
+               
+                byte[] data = Encoding.ASCII.GetBytes("Nome:"+Nome + ";" + "Cognome:" + Cognome + ";" + "NumeroTelefono" + NumeroTelefono + ";" + Email + ";" + Password);
+                stream.Write(data, 0, data.Length);
+
+                // Chiusura della connessione
+                stream.Close();
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Errore durante la connessione al server: " + ex.Message);
+            }
+        
+        }
+
+
+
+
+
+        /// <summary>
+        /// può essere utilizzato per richiedere input valido per diversi tipi di dat,
+        /// passando il messaggio appropriato e la funzione di validazione
+        /// Check numero di telefono, viene utilizzata la funzione int.TryParse
+        /// </summary>
+
+        public string CheckInput(string messaggio, Func<string, bool> validazione)
+        {
+            while (true)
+            {
+                Console.Write(messaggio);
+                string input = Console.ReadLine();
+
+                if (validazione(input))
+                {
+                    return input;
+                }
+
+                Console.WriteLine("Input non valido. Riprova.");
+            }
+
+        }
+        #endregion
+        #region private
+        /// <summary>
+        /// Metodo per verificare se un indirizzo email è valido
+        /// 
+        /// </summary>
+        private static bool EmailCheck(string email)
+        {
+            return email.Contains("@");
+        }
+
+        /* private bool ContieneNumeri(string input)
+         {
+             return input.Any(c => char.IsDigit(c));
+         }*/
+        #endregion
+
+
+
 
     }
 }
 
-
-
-
-
-
-    
 
 
 
