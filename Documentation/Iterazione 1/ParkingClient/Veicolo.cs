@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 using System.Net.Http;
 using System.Text.Json;
+using ParkingClient;
 
-namespace ParkingUser
+namespace ParkingClient
 {
     internal class Veicolo
     {
@@ -27,13 +28,20 @@ namespace ParkingUser
         }
 
         public Veicolo() { }
-
-        public void InserisciVeicolo()
-        {
+          
+        public void InserisciVeicolo(Utente utente)
+         { //passo parametro utente che rappresenta il riferimento alla classe Utente per poter usare check metodo is..
+            
             try
             {
-                Console.WriteLine("Inserisci la targa del veicolo:");
-                Targa = Console.ReadLine();
+                if (utente.IsUtenteInserito())
+                {
+                
+                Targa = utente.CheckInput("Inserisci la targa: ", input =>
+                {
+                    return !string.IsNullOrWhiteSpace(input);
+                });
+                
                 Console.WriteLine("Inserisci tipo del veicolo:(ad esempio, \"auto\", \"moto\", \"camion\", ecc.)");
                 TipoVeicolo = Console.ReadLine();
                 Console.WriteLine("Il veicolo è a due ruote? (s/n):");
@@ -43,8 +51,14 @@ namespace ParkingUser
                 Marca = Console.ReadLine();
                 Console.WriteLine("Inserisci il modello del veicolo:");
                 Modello = Console.ReadLine();
-                //booleano true alla variabile DueRuote se la risposta dell'utente
-                //s" ( case-insensitive), altrimenti le assegna il valore booleano false.
+                   
+                    //booleano true alla variabile DueRuote se la risposta dell'utente
+                    //s" ( case-insensitive), altrimenti le assegna il valore booleano false.
+                }
+                else
+                {
+                    Console.WriteLine("Devi inserire prima i dati dell'utente.");
+                }
             }
             catch (Exception ex)
             {
@@ -54,7 +68,7 @@ namespace ParkingUser
 
         }
 
-        public void ModificaDati()
+        public void ModificaVeicolo()
         {
             try
             {
@@ -107,13 +121,17 @@ namespace ParkingUser
             }
         }
 
-        public void VisualizzaDati()
+        public void VisualizzaVeicolo()
         {
             Console.WriteLine("Dati del veicolo:");
             Console.WriteLine("Targa: " + Targa);
             Console.WriteLine("Veicolo a due ruote: " + DueRuote);
         }
-     
+
+        /// <summary>
+        /// Da rivedere invio al server, metodo copiato anche su veicolo 
+        /// </summary>
+        /// <param name="url"></param>
         public void InviaDatiAlServer(string url)
         {//da approfondire doc
             using (HttpClient client = new HttpClient())
