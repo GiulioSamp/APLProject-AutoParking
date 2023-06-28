@@ -8,7 +8,7 @@
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
 #include <cppconn/prepared_statement.h>
-#include "C:\Users\Giuli\Documents\Visual Studio 2022\External Libraries\Crow\crow_all.h"
+#include "..\..\External Libraries\Crow\crow_all.h"
 
 using namespace std;
 const string server = "tcp://127.0.0.1:3306@autoparkdb";
