@@ -132,11 +132,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\crow_all.h" />
+    <ClInclude Include="DbHandler.h" />
     <ClInclude Include="Parcheggio.h" />
     <ClInclude Include="Piano.h" />
     <ClInclude Include="Posto.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DbHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parcheggio.cpp" />
     <ClCompile Include="Piano.cpp" />
