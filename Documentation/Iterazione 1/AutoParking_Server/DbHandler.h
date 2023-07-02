@@ -1,5 +1,4 @@
 #pragma once
-#include "sha.h"
 //Include dei drivers del Connector C++ usato per la connessione al db
 #include "mysql_connection.h"
 #include "mysql_driver.h" 

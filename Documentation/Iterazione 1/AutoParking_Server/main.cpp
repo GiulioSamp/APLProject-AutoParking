@@ -12,7 +12,7 @@ int main()
     crow::SimpleApp app;
     static DbHandler Db;
     Db.start();
-    CROW_ROUTE(app, "/register").methods("POST"_method)
+    CROW_ROUTE(app,"/register").methods("POST"_method)
         ([](const crow::request& req) {
         auto x = crow::json::load(req.body);
         if (!x) {
@@ -23,7 +23,7 @@ int main()
         os << x;
         return crow::response{os.str()+" "+result};
         });
-    CROW_ROUTE(app, "/vehicle").methods("POST"_method)
+    CROW_ROUTE(app,"/vehicle").methods("POST"_method)
         ([](const crow::request& req) {
         auto x = crow::json::load(req.body);
         if (!x) {

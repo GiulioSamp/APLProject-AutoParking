@@ -38,7 +38,7 @@ void Parcheggio::liberaPosto(int num_piano,int num_posto) {
 		}
 		piani[num_piano].Piano::liberaPosto(num_posto);
 	}
-	catch (std::out_of_range e) {
+	catch (std::out_of_range &e) {
 		std::cout << e.what() << std::endl;
 	}
 }

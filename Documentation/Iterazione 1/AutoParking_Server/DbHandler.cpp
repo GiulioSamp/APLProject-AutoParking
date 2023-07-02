@@ -1,6 +1,7 @@
 #include "DbHandler.h"
 #include <locale>
 #include <iostream>
+#include <exception>
 //Include dei drivers del Connector C++ usato per la connessione al db
 #include "mysql_connection.h"
 #include "mysql_driver.h" 
@@ -45,7 +46,7 @@ std::string DbHandler::start() {
 
 std::string DbHandler::add_user(crow::json::rvalue x) {
     pstmt = con->prepareStatement("INSERT INTO utente(nome, cognome, email, telefono, pass) VALUES(?,?,?,?,PASSWORD(?))");
-    pstmt->setString(1, ((std::string)x["nome"].s()));
+    pstmt->setString(1, (std::string)x["nome"].s());
     pstmt->setString(2, (std::string)x["cognome"].s());
     pstmt->setString(3, (std::string)x["email"].s());
     pstmt->setString(4, (std::string)x["telefono"].s());
@@ -65,22 +66,26 @@ std::string DbHandler::add_vehicle(crow::json::rvalue x) {
                 clear_pass = res->getString(1);
             }
         res = stmt->executeQuery("SELECT id, email, pass FROM utente WHERE email = '" + current_user + "'");
-            cout << "PASSME" << endl;
             while (res->next()) {
-                int id = res->getInt("id");
-                    if (clear_pass == res->getString(3)) {
-                        pstmt = con->prepareStatement("INSERT INTO veicolo(targa, marca, modello, anno, utente_id) VALUES(?,?,?,?,?)");
-                        pstmt->setString(1, (std::string)x["targa"].s());
-                        pstmt->setString(2, (std::string)x["marca"].s());
-                        pstmt->setString(3, (std::string)x["modello"].s());
-                        pstmt->setInt(4, x["anno"].i());
-                        pstmt->setInt(5, id);
-                        pstmt->execute();
-                        std::cout << "One row inserted." << endl;
-                        return "Success";
+                    int id = res->getInt("id");
+                    try {
+                        if (clear_pass == res->getString(3)) {
+                            pstmt = con->prepareStatement("INSERT INTO veicolo(targa, marca, modello, anno, utente_id) VALUES(?,?,?,?,?)");
+                            pstmt->setString(1, (std::string)x["targa"].s());
+                            pstmt->setString(2, (std::string)x["marca"].s());
+                            pstmt->setString(3, (std::string)x["modello"].s());
+                            pstmt->setInt(4, x["anno"].i());
+                            pstmt->setInt(5, id);
+                            pstmt->execute();
+                            std::cout << "One row inserted." << endl;
+                            return "Success";
+                        }
+                        else {
+                            throw std::runtime_error("Password is not valid");
+                        }
                     }
-                    else {
-                        return "password not valid";
+                    catch (std::runtime_error &e) {
+                        return e.what();
                     }
             }
     }

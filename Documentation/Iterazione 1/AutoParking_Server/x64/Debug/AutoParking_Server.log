@@ -1,6 +1,9 @@
-﻿  Parcheggio.cpp
+﻿  DbHandler.cpp
+C:\Users\auror\source\repos\AutoParking_Server\DbHandler.h(3,10): fatal  error C1083: Non è possibile aprire il file inclusione: 'mysql_connection.h': No such file or directory
+  main.cpp
+C:\Users\auror\source\repos\AutoParking_Server\DbHandler.h(3,10): fatal  error C1083: Non è possibile aprire il file inclusione: 'mysql_connection.h': No such file or directory
+  Parcheggio.cpp
   Piano.cpp
   Posto.cpp
-  main.cpp
-C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(6,10): fatal  error C1083: Non è possibile aprire il file inclusione: 'mysql_connection.h': No such file or directory
   Generazione del codice in corso...
+C:\Users\auror\source\repos\AutoParking_Server\Parcheggio.cpp(59): warning C4715: 'Parcheggio::verificaPosto': non tutti i percorsi di controllo restituiscono un valore

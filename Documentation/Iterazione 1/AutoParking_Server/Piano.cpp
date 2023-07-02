@@ -39,7 +39,7 @@ void Piano::occupaPosto() {
 				i++;
 			}
 		}
-		catch (std::logic_error e) {
+		catch (std::logic_error &e) {
 			std::cout << e.what() << std::endl;
 		}
 	}
@@ -51,7 +51,7 @@ void Piano::liberaPosto(int num_posto) {
 		std::cout << "Posto n." << num_posto << " liberato!" << std::endl;
 		posti_liberi++;
 	}
-	catch (std::logic_error e) {
+	catch (std::logic_error &e) {
 		std::cout << e.what() << std::endl;
 	}
 }
