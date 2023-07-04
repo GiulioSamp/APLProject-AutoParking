@@ -38,7 +38,7 @@ int main()
             return crow::response{os.str() + " Added vehicle to user: " + result};
         }
         else {
-            return crow::response{"User not logged in"};
+            return crow::response{400,"User not logged in"};
         }
         });
 
@@ -53,7 +53,7 @@ int main()
             return crow::response("Success: User verified!");
         }
         else {
-            return crow::response("User not verified!");
+            return crow::response(400,"Login details not present in db");
         }
             });
 
