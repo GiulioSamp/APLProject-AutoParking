@@ -1,146 +1,144 @@
 ﻿  DbHandler.cpp
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(777,20): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1030,92): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1066,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1105,112): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(777,20): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1030,92): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1066,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1105,112): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(2131,39): warning C4267: 'inizializzazione': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(3268,23): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4932,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4952,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(7840,35): warning C4267: 'argomento': conversione da 'size_t' a 'uint32_t'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8300,32): warning C4267: 'return': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8638,33): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8657,48): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8659,53): warning C4267: 'argomento': conversione da 'size_t' a '_Ty'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(2131,39): warning C4267: 'inizializzazione': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(3268,23): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4932,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4952,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(7840,35): warning C4267: 'argomento': conversione da 'size_t' a 'uint32_t'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8300,32): warning C4267: 'return': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8638,33): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8657,48): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8659,53): warning C4267: 'argomento': conversione da 'size_t' a '_Ty'. Possibile perdita di dati.
           with
           [
               _Ty=int
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8762,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8908,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8919,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8931,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8942,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9004,60): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9104,28): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10070,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10091,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10112,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10134,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10150,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10165,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10215,53): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10226,45): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10272,36): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10275,33): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,101): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,87): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10480,118): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10529,100): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10690,24): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\DbHandler.cpp(76,53): warning C4244: 'argomento': conversione da 'int64_t' a 'int32_t'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8762,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8908,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8919,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8931,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8942,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9004,60): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9104,28): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10070,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10091,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10112,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10134,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10150,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10165,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10215,53): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10226,45): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10272,36): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10275,33): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,101): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,87): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10480,118): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10529,100): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10690,24): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
   main.cpp
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(777,20): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1030,92): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1066,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1105,112): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(777,20): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1030,92): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1066,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(1105,112): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(2131,39): warning C4267: 'inizializzazione': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(3268,23): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4932,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4952,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(7840,35): warning C4267: 'argomento': conversione da 'size_t' a 'uint32_t'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8300,32): warning C4267: 'return': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8638,33): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8657,48): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8659,53): warning C4267: 'argomento': conversione da 'size_t' a '_Ty'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(2131,39): warning C4267: 'inizializzazione': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(3268,23): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4932,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(4952,32): warning C4244: '=': conversione da '__int64' a 'unsigned long'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(7840,35): warning C4267: 'argomento': conversione da 'size_t' a 'uint32_t'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8300,32): warning C4267: 'return': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8638,33): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8657,48): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8659,53): warning C4267: 'argomento': conversione da 'size_t' a '_Ty'. Possibile perdita di dati.
           with
           [
               _Ty=int
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8762,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8908,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8919,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8931,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8942,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9004,60): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9104,28): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10070,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10091,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10112,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10134,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10150,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10165,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10215,53): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10226,45): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10272,36): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10275,33): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,101): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,87): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10480,118): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10529,100): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10690,24): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11668,63): warning C4244: 'argomento': conversione da 'unsigned __int64' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11658,14): message : durante la compilazione della funzione membro 'void crow::Connection<Adaptor,Handler>::do_read(void)' di modello classe
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8762,94): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8908,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8919,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8931,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(8942,54): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9004,60): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(9104,28): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10070,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10091,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10112,70): warning C4244: 'argomento': conversione da '__int64' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10134,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10150,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10165,61): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10215,53): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10226,45): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10272,36): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10275,33): warning C4267: '+=': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,101): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10474,87): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10480,118): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10529,100): warning C4267: 'argomento': conversione da 'size_t' a 'unsigned int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(10690,24): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11668,63): warning C4244: 'argomento': conversione da 'unsigned __int64' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11658,14): message : durante la compilazione della funzione membro 'void crow::Connection<Adaptor,Handler>::do_read(void)' di modello classe
           with
           [
               Adaptor=crow::SocketAdaptor,
               Handler=crow::Crow<>
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11283,28): message : vedere il primo riferimento a 'crow::Connection<Adaptor,Handler>::do_read' in 'crow::Connection<Adaptor,Handler>::start::<lambda_1>::operator ()'
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11283,28): message : vedere il primo riferimento a 'crow::Connection<Adaptor,Handler>::do_read' in 'crow::Connection<Adaptor,Handler>::start::<lambda_1>::operator ()'
           with
           [
               Adaptor=crow::SocketAdaptor,
               Handler=crow::Crow<>
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12025): message : vedere il riferimento all'istanza 'crow::Connection<Adaptor,Handler>' di modello classe di cui è in corso la compilazione
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12025): message : vedere il riferimento all'istanza 'crow::Connection<Adaptor,Handler>' di modello classe di cui è in corso la compilazione
           with
           [
               Adaptor=crow::SocketAdaptor,
               Handler=crow::Crow<>
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12024,14): message : durante la compilazione della funzione membro 'void crow::Server<crow::Crow<>,crow::SocketAdaptor>::do_accept(void)' di modello classe
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11982,22): message : vedere il primo riferimento a 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::do_accept' in 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::run'
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12400,29): message : vedere il primo riferimento a 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::run' in 'crow::Crow<>::run'
-C:\Users\auror\source\repos\AutoParking_Server\main.cpp(44,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12393,1): message : vedere il riferimento all'istanza 'crow::Server<crow::Crow<>,crow::SocketAdaptor>' di modello classe di cui è in corso la compilazione
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12371,14): message : durante la compilazione della funzione membro 'void crow::Crow<>::run(void)' di modello classe
-C:\Users\auror\source\repos\AutoParking_Server\main.cpp(44,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
-C:\Users\auror\source\repos\AutoParking_Server\DbHandler.h(22,18): message : vedere il riferimento all'istanza 'crow::Crow<>' di modello classe di cui è in corso la compilazione
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(6475,25): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(6460,14): message : durante la compilazione della funzione membro 'bool crow::HTTPParser<crow::Connection<Adaptor,Handler>>::feed(const char *,int)' di modello classe
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12024,14): message : durante la compilazione della funzione membro 'void crow::Server<crow::Crow<>,crow::SocketAdaptor>::do_accept(void)' di modello classe
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11982,22): message : vedere il primo riferimento a 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::do_accept' in 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::run'
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12400,29): message : vedere il primo riferimento a 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::run' in 'crow::Crow<>::run'
+C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(62,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12393,1): message : vedere il riferimento all'istanza 'crow::Server<crow::Crow<>,crow::SocketAdaptor>' di modello classe di cui è in corso la compilazione
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12371,14): message : durante la compilazione della funzione membro 'void crow::Crow<>::run(void)' di modello classe
+C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(62,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
+C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.h(23,18): message : vedere il riferimento all'istanza 'crow::Crow<>' di modello classe di cui è in corso la compilazione
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(6475,25): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(6460,14): message : durante la compilazione della funzione membro 'bool crow::HTTPParser<crow::Connection<Adaptor,Handler>>::feed(const char *,int)' di modello classe
           with
           [
               Adaptor=crow::SocketAdaptor,
               Handler=crow::Crow<>
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11668,32): message : vedere il primo riferimento a 'crow::HTTPParser<crow::Connection<Adaptor,Handler>>::feed' in 'crow::Connection<Adaptor,Handler>::do_read::<lambda_1>::operator ()'
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11668,32): message : vedere il primo riferimento a 'crow::HTTPParser<crow::Connection<Adaptor,Handler>>::feed' in 'crow::Connection<Adaptor,Handler>::do_read::<lambda_1>::operator ()'
           with
           [
               Adaptor=crow::SocketAdaptor,
               Handler=crow::Crow<>
           ]
-C:\Users\auror\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11791,1): message : vedere il riferimento all'istanza 'crow::HTTPParser<crow::Connection<Adaptor,Handler>>' di modello classe di cui è in corso la compilazione
+C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11791,1): message : vedere il riferimento all'istanza 'crow::HTTPParser<crow::Connection<Adaptor,Handler>>' di modello classe di cui è in corso la compilazione
           with
           [
               Adaptor=crow::SocketAdaptor,
               Handler=crow::Crow<>
           ]
-  Parcheggio.cpp
-  Piano.cpp
-  Posto.cpp
-     Creazione della libreria C:\Users\auror\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.lib e dell'oggetto C:\Users\auror\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.exp
+     Creazione della libreria C:\Users\Giuli\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.lib e dell'oggetto C:\Users\Giuli\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.exp
   Generazione codice in corso...
-  Previous IPDB not found, fall back to full compilation.
-C:\Users\auror\source\repos\AutoParking_Server\DbHandler.cpp(90): warning C4715: 'DbHandler::add_vehicle': non tutti i percorsi di controllo restituiscono un valore
-  All 5948 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.cpp(114): warning C4715: 'DbHandler::add_vehicle': non tutti i percorsi di controllo restituiscono un valore
+C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.cpp(93): warning C4715: 'DbHandler::check_user': non tutti i percorsi di controllo restituiscono un valore
+  15 of 5974 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    57 functions had inline decision re-evaluated but remain unchanged
   Generazione codice terminata
 mysqlcppconn-static.lib(mysql_driver.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_driver.obj)' o in ''; oggetto collegato senza informazioni di debug
 mysqlcppconn-static.lib(mysql_connection.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_connection.obj)' o in ''; oggetto collegato senza informazioni di debug
@@ -164,4 +162,4 @@ mysqlcppconn-static.lib(mysql_native_resultset_wrapper.obj) : warning LNK4099: i
 mysqlcppconn-static.lib(mysql_native_statement_wrapper.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_native_statement_wrapper.obj)' o in ''; oggetto collegato senza informazioni di debug
 mysqlcppconn-static.lib(mysql_art_rset_metadata.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_art_rset_metadata.obj)' o in ''; oggetto collegato senza informazioni di debug
 mysqlcppconn-static.lib(mysql_resultset_metadata.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_resultset_metadata.obj)' o in ''; oggetto collegato senza informazioni di debug
-  AutoParking_Server.vcxproj -> C:\Users\auror\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.exe
+  AutoParking_Server.vcxproj -> C:\Users\Giuli\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.exe

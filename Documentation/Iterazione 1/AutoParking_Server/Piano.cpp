@@ -5,7 +5,6 @@
 #include <vector>
 #include <memory>
 
-
 void Piano::stampa() {
 
 	std::cout << "Piano: " << num_piano << ", con posti: " << posti_liberi << std::endl;
@@ -15,7 +14,7 @@ Piano::Piano(int n, int m) {
 	num_piano = n;
 	posti_liberi = m;
 	for (int i = 0; i < m; i++) {
-	posti.push_back(*(new Posto(i)));	
+		posti.push_back(*(new Posto(i)));	
 	}
 }
 
@@ -39,7 +38,7 @@ void Piano::occupaPosto() {
 				i++;
 			}
 		}
-		catch (std::logic_error &e) {
+		catch (std::logic_error e) {
 			std::cout << e.what() << std::endl;
 		}
 	}
@@ -51,7 +50,7 @@ void Piano::liberaPosto(int num_posto) {
 		std::cout << "Posto n." << num_posto << " liberato!" << std::endl;
 		posti_liberi++;
 	}
-	catch (std::logic_error &e) {
+	catch (std::logic_error e) {
 		std::cout << e.what() << std::endl;
 	}
 }

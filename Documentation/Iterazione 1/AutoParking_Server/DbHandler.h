@@ -6,6 +6,7 @@
 #include <cppconn/exception.h>
 #include <cppconn/prepared_statement.h>
 #include "..\..\External Libraries\Crow\crow_all.h"
+
 using namespace std;
 class DbHandler {
 private:
@@ -26,4 +27,5 @@ public:
 	string start();
 	string add_user(crow::json::rvalue);
 	string add_vehicle(crow::json::rvalue);
+	string check_user(crow::json::rvalue);
 };
