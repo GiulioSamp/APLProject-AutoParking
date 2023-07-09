@@ -8,42 +8,39 @@ namespace ParkingClient
 {
     public class Handler
     {
-        public async Task<HttpResponseMessage> InviaDatiAlServer<T>(T oggetto, string endpoint)
-            {
-                try
-                {
-                    
-                    var dtoJson = JsonConvert.SerializeObject(oggetto);
+        #region public
+    
+        public static async Task<HttpResponseMessage> InviaDatiAlServer<T>(T oggetto, string endpoint)
+         {
+             try
+             {
 
-                using (var client = new HttpClient())
-                    {
-                    client.BaseAddress = new Uri("http://localhost:18080/");
+                 var dtoJson = JsonConvert.SerializeObject(oggetto);
 
-                        var content = new StringContent(dtoJson, Encoding.UTF8, "application/json");
-                        var response = await client.PostAsync(endpoint, content);
+                 using (var client = new HttpClient())
+                 {
+                     client.BaseAddress = new Uri("http://localhost:18080");
 
-                        return response;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Si è verificata un'eccezione durante l'invio dei dati al server: {ex.Message}");
-                    return null;
-                }
-            }
-        /// <summary>
-        /// DA IMPLEMENTARE TUTTO sTARTpaRKIN
-        /// </summary>
-        public void StartParking() {
-            Console.WriteLine("ok parcheggia"); ///DA IMPLEMENTARE TUTTO DI START   
-        }
+                     var content = new StringContent(dtoJson, Encoding.UTF8, "application/json");
+                     var response = await client.PostAsync(endpoint, content);
+
+                     return response;
+                 }
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine($"Si è verificata un'eccezione durante l'invio dei dati al server: {ex.Message}");
+                 return null;
+             }
+         }
 
         public void EntryMenu()
         {
-            Utente utente = new Utente();
-            Veicolo veicolo = new Veicolo();
-            Login login = new Login();
-            bool utenteRegistrato = false;
+            UserManager utente = new UserManager();
+            VehicleManager veicolo = new VehicleManager();
+            LoginManager login = new LoginManager();
+            ParkingManager park = new ParkingManager();
+           bool utenteRegistrato = false;
             Console.WriteLine("1. Registrazione");
             Console.WriteLine("2. Login");
             Console.WriteLine("3. Esci");
@@ -71,7 +68,7 @@ namespace ParkingClient
                         ViewParameters(utente);
                         ViewParameters(veicolo);
                         utenteRegistrato = true; //?????????????
-                        InternalMenu(utente, veicolo);
+                        InternalMenu(utente, veicolo, park);
                     }
                     break;
 
@@ -85,7 +82,7 @@ namespace ParkingClient
                     //{
                         if(login.DoLogin())
                         {
-                            InternalMenu(utente, veicolo);
+                            InternalMenu(utente, veicolo, park );
                             utenteRegistrato = true;
                         }
                        
@@ -100,6 +97,7 @@ namespace ParkingClient
                     break;
             }           
     }
+       
         public static void ViewParameters<T>(T oggetto)
         {
             Type tipoOggetto = typeof(T);
@@ -118,34 +116,48 @@ namespace ParkingClient
                     Console.WriteLine($"Errore durante la lettura della proprietà {nomeProprieta}: {ex.Message}");
                 }
             }
+           
         }
-       
+        #endregion
+
         #region private 
-        private void InternalMenu(Utente utente, Veicolo veicolo)
+        private async Task InternalMenu(UserManager utente, VehicleManager veicolo, ParkingManager park)
         {
             while (true)
             {
-                Console.Write($"\nBenvenuto/a {utente.Nome}!");
-                Console.WriteLine("\n1. Inizia parcheggio");
-                Console.WriteLine("2. Aggiungi nuovo veicolo");
-                Console.WriteLine("3. Modifica dati veicolo");
-                Console.WriteLine("4. Modifica dati utente");
-                Console.WriteLine("5. Visualizza dati utente");
-                Console.WriteLine("6. Visualizza dati veicolo");
-                Console.WriteLine("7. Esci");
+                
 
-                Console.Write("Seleziona un'opzione: ");
+                //if (!parcheggioAvviato)
+                //{
+                    Console.Write($"\nBenvenuto/a {utente.Nome}!Seleziona un'opzione:"); 
+                    // Stampa tutte le opzioni del menu solo se il parcheggio non è stato avviato
+                    Console.WriteLine("\n1. Inizia parcheggio");
+                    Console.WriteLine("2. Aggiungi nuovo veicolo");
+                    Console.WriteLine("3. Modifica dati veicolo");
+                    Console.WriteLine("4. Modifica dati utente");
+                    Console.WriteLine("5. Visualizza dati utente");
+                    Console.WriteLine("6. Visualizza dati veicolo");
+                    
+               // }
+
+                Console.WriteLine("7. Esci");
+                
+
                 //da c# v8 switch con le espressioni 
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        StartParking();
+                        var response = await park.StartParking(utente, veicolo);
+                        Console.WriteLine(response);
+                        Console.WriteLine("fine park");
+                       // parcheggioAvviato = true; // Imposta il flag su true dopo l'avvio del parcheggio
                         break;
                     case "2":
                         veicolo.AddNewVehicle();
                         break;
                     case "3":
-                        veicolo.ModifyVehicle();
+                        veicolo.ModifyVehicle(utente);
+                        InviaDatiAlServer(veicolo, "/vehicle");
                         break;
                     case "4":
                         utente.EditUser();
