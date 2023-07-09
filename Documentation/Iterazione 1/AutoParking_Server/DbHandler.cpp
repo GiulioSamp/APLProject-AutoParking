@@ -107,8 +107,8 @@ std::string DbHandler::register_park(crow::json::rvalue x,Parcheggio& p) {
             std::tuple<int, int> places = p.occupaPosto();
             if (std::get<0>(places) != NULL) {
                 pstmt = con->prepareStatement("INSERT INTO utente_parcheggiato(n_posto,n_piano, utente, targa) VALUES(?,?,?,?)");
-                pstmt->setString(1, std::to_string(std::get<0>(places)));
-                pstmt->setString(2, std::to_string(std::get<1>(places)));
+                pstmt->setString(1, std::to_string(std::get<1>(places)));
+                pstmt->setString(2, std::to_string(std::get<0>(places)));
                 pstmt->setInt(3, res->getInt(1));
                 pstmt->setString(4, (std::string)x["Targa"].s());
                 pstmt->execute();

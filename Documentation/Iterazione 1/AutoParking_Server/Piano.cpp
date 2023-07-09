@@ -34,9 +34,6 @@ int Piano::occupaPosto() {
 					std::cout << "Posto n." << i << " occupato!" << std::endl;
 					return i;
 				}
-				else {
-					i++;
-				}
 			}
 			catch (std::logic_error e) {
 				std::cout << e.what() << std::endl;

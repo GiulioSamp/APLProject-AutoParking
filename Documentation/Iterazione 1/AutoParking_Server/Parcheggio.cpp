@@ -24,9 +24,7 @@ std::tuple<int, int>  Parcheggio::occupaPosto() {
 		if (piani[i].Piano::sizeofPosti() != 0) {
 			int x = piani[i].Piano::occupaPosto();
 			return std::make_tuple(i, x);
-		}
-		else {
-			i++;
+			break;
 		}
 		std::cout << "Parcheggio pieno" << std::endl;
 		return std::make_tuple(NULL,NULL);
