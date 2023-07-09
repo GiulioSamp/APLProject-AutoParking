@@ -1,5 +1,6 @@
 #pragma once
 //Include dei drivers del Connector C++ usato per la connessione al db
+#include "Parcheggio.h"
 #include "mysql_connection.h"
 #include "mysql_driver.h" 
 #include <cppconn/driver.h>
@@ -13,8 +14,6 @@ private:
 	const string server = "tcp://127.0.0.1:3306@autoparkdb";
 	const string username = "root";
 	const string password = "";
-	string current_user;
-	string current_password;
 	sql::Driver* driver;
 	sql::Connection* con;
 	sql::Statement* stmt;
@@ -28,4 +27,5 @@ public:
 	string add_user(crow::json::rvalue);
 	string add_vehicle(crow::json::rvalue);
 	string check_user(crow::json::rvalue);
+	string register_park(crow::json::rvalue,Parcheggio&);
 };

@@ -10,7 +10,7 @@ class Parcheggio {
 public:
 	Parcheggio(int,int);
 	~Parcheggio();
-	void occupaPosto();
+	std::tuple<int, int> occupaPosto();
 	void liberaPosto(int, int);
 	void stampaPosti();
 	bool verificaPosto();

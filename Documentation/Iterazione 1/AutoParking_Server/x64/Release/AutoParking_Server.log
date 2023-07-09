@@ -108,11 +108,11 @@ C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12024,14): message : durante la compilazione della funzione membro 'void crow::Server<crow::Crow<>,crow::SocketAdaptor>::do_accept(void)' di modello classe
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(11982,22): message : vedere il primo riferimento a 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::do_accept' in 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::run'
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12400,29): message : vedere il primo riferimento a 'crow::Server<crow::Crow<>,crow::SocketAdaptor>::run' in 'crow::Crow<>::run'
-C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(62,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
+C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(92,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12393,1): message : vedere il riferimento all'istanza 'crow::Server<crow::Crow<>,crow::SocketAdaptor>' di modello classe di cui è in corso la compilazione
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(12371,14): message : durante la compilazione della funzione membro 'void crow::Crow<>::run(void)' di modello classe
-C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(62,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
-C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.h(23,18): message : vedere il riferimento all'istanza 'crow::Crow<>' di modello classe di cui è in corso la compilazione
+C:\Users\Giuli\source\repos\AutoParking_Server\main.cpp(92,13): message : vedere il primo riferimento a 'crow::Crow<>::run' in 'main'
+C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.h(22,18): message : vedere il riferimento all'istanza 'crow::Crow<>' di modello classe di cui è in corso la compilazione
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(6475,25): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
 C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.h(6460,14): message : durante la compilazione della funzione membro 'bool crow::HTTPParser<crow::Connection<Adaptor,Handler>>::feed(const char *,int)' di modello classe
           with
@@ -134,11 +134,9 @@ C:\Users\Giuli\source\repos\AutoParking_Server\External Libraries\Crow\crow_all.
           ]
      Creazione della libreria C:\Users\Giuli\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.lib e dell'oggetto C:\Users\Giuli\source\repos\AutoParking_Server\x64\Release\AutoParking_Server.exp
   Generazione codice in corso...
-C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.cpp(114): warning C4715: 'DbHandler::add_vehicle': non tutti i percorsi di controllo restituiscono un valore
-C:\Users\Giuli\source\repos\AutoParking_Server\DbHandler.cpp(93): warning C4715: 'DbHandler::check_user': non tutti i percorsi di controllo restituiscono un valore
-  15 of 5974 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    57 functions had inline decision re-evaluated but remain unchanged
+  8 of 6147 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    39 functions had inline decision re-evaluated but remain unchanged
   Generazione codice terminata
 mysqlcppconn-static.lib(mysql_driver.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_driver.obj)' o in ''; oggetto collegato senza informazioni di debug
 mysqlcppconn-static.lib(mysql_connection.obj) : warning LNK4099: impossibile trovare il PDB '' con 'mysqlcppconn-static.lib(mysql_connection.obj)' o in ''; oggetto collegato senza informazioni di debug

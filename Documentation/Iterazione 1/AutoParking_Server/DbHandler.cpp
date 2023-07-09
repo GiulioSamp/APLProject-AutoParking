@@ -1,6 +1,8 @@
 #include "DbHandler.h"
+#include <exception>
 #include <locale>
 #include <iostream>
+#include <tuple>
 //Include dei drivers del Connector C++ usato per la connessione al db
 #include "mysql_connection.h"
 #include "mysql_driver.h" 
@@ -12,6 +14,7 @@
 DbHandler::DbHandler() {
 	con = nullptr;
 }
+
 DbHandler::~DbHandler() {
 	delete con;
 	delete stmt;
@@ -32,13 +35,13 @@ std::string DbHandler::start() {
         std::cout << "Finished dropping table (if existed)" << endl;
         stmt->execute("CREATE TABLE utente (id serial PRIMARY KEY, nome VARCHAR(50), cognome VARCHAR(50), email VARCHAR(230) UNIQUE NOT NULL, telefono varchar(30), pass varchar(256) NOT NULL);");
         stmt->execute("CREATE TABLE veicolo (targa varchar(40) PRIMARY KEY, marca VARCHAR(50), modello VARCHAR(50), anno VARCHAR(4), utente_id BIGINT UNSIGNED, FOREIGN KEY (utente_id) REFERENCES utente(id) ON DELETE CASCADE);");
-        stmt->execute("CREATE TABLE utente_parcheggiato(n_posto INT PRIMARY KEY, utente serial, targa VARCHAR(40), data_inizio TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (utente) REFERENCES utente(id) ON DELETE CASCADE, FOREIGN KEY (targa) REFERENCES veicolo(targa) ON DELETE CASCADE ON UPDATE CASCADE);");
+        stmt->execute("CREATE TABLE utente_parcheggiato(id_posto serial PRIMARY KEY,n_piano VARCHAR(3),n_posto VARCHAR(3), utente BIGINT UNSIGNED, targa VARCHAR(40), data_inizio TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (utente) REFERENCES utente(id) ON DELETE CASCADE, FOREIGN KEY (targa) REFERENCES veicolo(targa) ON DELETE CASCADE ON UPDATE CASCADE);");
         std::cout << "Finished creating table" << endl;
         return (std::string)"Finished creating table";
     }
     catch (sql::SQLException e)
     {
-        cout << "Could not connect to server. Error message: " << e.what() << endl;
+        cout << "Error message: " << e.what() << endl;
         system("pause");
         exit(1);
     }
@@ -52,50 +55,32 @@ std::string DbHandler::add_user(crow::json::rvalue x) {
     pstmt->setString(4, (std::string)x["Telefono"].s());
     pstmt->setString(5, (std::string)x["Pass"].s());
     pstmt->execute();
-    current_user = (std::string)x["Email"].s();
-    current_password = (std::string)x["Pass"].s();
-    std::cout << "One row inserted. current user: "<< current_user << endl;
+    std::cout << "One row inserted. current user: "<< (std::string)x["Email"].s() << endl;
     return "Success";
 }
 
 std::string DbHandler::check_user(crow::json::rvalue x) {
     string hashed_password;
-    if (current_user.length() == 0 && current_password.length() == 0) {
         res = stmt->executeQuery("SELECT PASSWORD('"+(std::string)x["Pass"].s()+"')");
         while (res->next()) {
             hashed_password = res->getString(1);
         }
         res = stmt->executeQuery("SELECT id, email, pass FROM utente WHERE email = '"+(std::string)x["Email"].s()+"'");
-        while (res->next()) {
+        if (res->next()) {
             if (res->getString(2) == (std::string)x["Email"].s() && res->getString(3) == hashed_password) {
-                current_user = (std::string)x["Email"].s();
-                current_password = (std::string)x["Pass"].s();
-                return "User verified, id: " + res->getInt(1);
+                return "Success: User verified, id: " + res->getInt(1);
             }
             else
-                return "User not verified";
+                throw std::bad_exception();
         }
-    }
-    else {
-        res = stmt->executeQuery("SELECT PASSWORD('" + current_password + "')");
-        while (res->next()) {
-            hashed_password = res->getString(1);
+        else {
+            throw std::exception();
         }
-        res = stmt->executeQuery("SELECT id, email, pass FROM utente WHERE email = '" + current_user + "'");
-        while (res->next()) {
-            if (res->getString(2) == current_user && res->getString(3) == hashed_password) {
-                return "User verified, id: " + res->getInt(1);
-            }
-            else
-                return "User not verified";
-        }
-    }
 }
 
 std::string DbHandler::add_vehicle(crow::json::rvalue x) {
-    if (current_user.length() != 0) {
-        res = stmt->executeQuery("SELECT id, email, pass FROM utente WHERE email = '" + current_user + "'");
-        while (res->next()) {
+        res = stmt->executeQuery("SELECT id, email, pass FROM utente WHERE email = '" + (std::string)x["Email"].s() + "'");
+        if (res->next()) {
             pstmt = con->prepareStatement("INSERT INTO veicolo(targa, marca, modello, anno, utente_id) VALUES(?,?,?,?,?)");
             pstmt->setString(1, (std::string)x["Targa"].s());
             pstmt->setString(2, (std::string)x["Marca"].s());
@@ -104,12 +89,49 @@ std::string DbHandler::add_vehicle(crow::json::rvalue x) {
             pstmt->setInt(5, res->getInt(1));
             pstmt->execute();
             std::cout << "One row inserted." << endl;
-            return "Success";
+            return "Success, added car: "+ (std::string)x["Targa"].s()+" to user: "+ (std::string)x["Email"].s();
+        }
+    else
+    {
+        throw std::bad_exception();
+        return "Invalid User, can't proceed!";
+    }
+}
+
+std::string DbHandler::register_park(crow::json::rvalue x,Parcheggio& p) {
+    res = stmt->executeQuery("SELECT * FROM utente_parcheggiato WHERE targa = '" + (std::string)x["Targa"].s() + "'");
+    if (!res->next()) {
+        res = stmt->executeQuery("SELECT id, email, pass FROM utente JOIN veicolo WHERE email = '" + (std::string)x["Email"].s()
+            + "' AND targa = '" + (std::string)x["Targa"].s() + "'");
+        if (res->next()) {
+            std::tuple<int, int> places = p.occupaPosto();
+            if (std::get<0>(places) != NULL) {
+                pstmt = con->prepareStatement("INSERT INTO utente_parcheggiato(n_posto,n_piano, utente, targa) VALUES(?,?,?,?)");
+                pstmt->setString(1, std::to_string(std::get<0>(places)));
+                pstmt->setString(2, std::to_string(std::get<1>(places)));
+                pstmt->setInt(3, res->getInt(1));
+                pstmt->setString(4, (std::string)x["Targa"].s());
+                pstmt->execute();
+                std::cout << "One row inserted." << endl;
+                return "Success, User: " + res->getString(2)
+                    + " parked his car: " + (std::string)x["Targa"].s()
+                    + " in floor: " + std::to_string(std::get<0>(places))
+                    + " and spot: " + std::to_string(std::get<1>(places));
+            }
+            else {
+                throw std::logic_error("Park is full!");
+                return "Failure: Park is full!";
+            }
+        }
+        else {
+            throw std::exception();
+            return "Failure: Vehicle registration id not valid!";
         }
     }
     else
     {
-        return "User not logged in, can't proceed!";
+        throw std::bad_exception();
+        return "Failure: Vehicle is already parked!";
     }
 }
 

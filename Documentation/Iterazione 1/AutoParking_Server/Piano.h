@@ -11,7 +11,7 @@ public:
 	Piano(int, int);
 	~Piano();
 	void stampa();
-	void occupaPosto();
+	int occupaPosto();
 	void liberaPosto(int);
 	int sizeofPosti();
 };
