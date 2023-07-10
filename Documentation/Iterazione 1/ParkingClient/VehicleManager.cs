@@ -1,12 +1,7 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.Linq;
+using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-//using System.Threading.Tasks;
-
-//using System.Net.Http;
-//using System.Text.Json;
 using ParkingClient;
 
 namespace ParkingClient
@@ -56,9 +51,7 @@ namespace ParkingClient
                 {
                     return input.All(char.IsDigit) && input.Length == 4;
                 });
-                    Email = utente.Email;
-                    // Invio l'email al server
-                    //Validation.SendUserDataToServer(utente.Email, "/vehicle");
+                    Email = utente.Email;                  
                 }
                 else
                 {
@@ -132,7 +125,27 @@ namespace ParkingClient
             }
         }
 
+       /* public async Task StartParking(UserManager utente)
+        {
+            Email = utente.Email;
+            Targa = Targa;
 
+            try
+            {
+                var response = await SendDataParkToServer();
+               // return response;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("StartParking errore durante l'invio dei dati al server: " + ex.Message);
+                //return "Fail2 su start.";
+            }
+        }*/
+
+
+        /// <summary>
+        /// IMPLEMENTARE MEGLIO, ADD PIU VEICOLI
+        /// </summary>
         private List<Vehicle> vehicles = new List<Vehicle>();
         /// <summary>
         /// il metodo addnew,, crea un oggetto vehicle utilizzando costruttore predefinito
@@ -210,5 +223,83 @@ namespace ParkingClient
             public string Modello { get; set; }
             public string Anno { get; set; }
         }
+
+
+        #region private
+        /* private async Task<string> SendDataParkToServer()
+         {
+             try
+             {
+                 using (HttpClient httpClient = new HttpClient())
+                 {
+                     var requestData = new { Email = Email, Targa = Targa };
+                     var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
+                     var response = await httpClient.PostAsync("http://localhost:18080/park", content);
+                     response.EnsureSuccessStatusCode();
+                     //sora .EnsureSuccessStatusCode(); solleverà un'eccezione se la risposta non ha un codice successo
+                     var jsonResponse = await response.Content.ReadAsStringAsync();
+                     //Console.WriteLine("----Risposta JSON ricevuta dal server:-----------");
+                     Console.WriteLine(jsonResponse);
+                     return jsonResponse;
+                 }
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine("SendDataParkToServer errore durante l'invio dei dati al server: " + ex.Message);
+                 return "Fail";
+             }
+         }*/
+        private async Task<bool> SendDataParkToServer()
+        {
+            try
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    var requestData = new { Email = Email, Targa = Targa };
+                    var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
+                    var response = await httpClient.PostAsync("http://localhost:18080/park", content);
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("SendDataParkToServer errore durante l'invio dei dati al server: " + ex.Message);
+                return false;
+            }
+        }
+        public async Task StartParking(UserManager utente)
+        {
+            Email = utente.Email;
+            Targa = Targa;
+
+            try
+            {
+                bool isSuccess = await SendDataParkToServer();
+
+                if (isSuccess)
+                {
+                    Console.WriteLine("Parcheggio completato con successo");
+                    // Altre azioni da eseguire dopo il parcheggio completato con successo
+                }
+                else
+                {
+                    Console.WriteLine("Errore durante l'invio dei dati al server");
+                    // Altre azioni da eseguire in caso di errore
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("StartParking errore durante l'invio dei dati al server: " + ex.Message);
+                Console.WriteLine("Fail2 su start.");
+            }
+        }
+
+        #endregion
     }
 }
