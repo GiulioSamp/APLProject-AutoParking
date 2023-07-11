@@ -3,12 +3,18 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 using ParkingClient;
+using System.Security.Authentication;
 
 namespace ParkingClient
 {
     
     public class UserManager
     {
+        /*private string _nome { get; set; }
+        public string _cognome { get; set; }
+        public string _telefono { get; set; }
+        public string _email { get; set; }
+        public string _pass { get; set; }*/
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public string Telefono { get; set; }
@@ -26,9 +32,6 @@ namespace ParkingClient
         }
         public UserManager() { }
        
-        
-
-        #region public
         public void UserRegistration()
         {
             Console.WriteLine("\nInserisci i dati utente per procedere con la registrazione");
@@ -128,66 +131,7 @@ namespace ParkingClient
                 Console.WriteLine($"Errore: {ex.Message}");
             }
         }
-
-        public bool DoLogin()
-        {
-            Console.WriteLine("Benvenuto! Effettua il login.");
-            bool accessoConcesso = false;
-            do
-            {
-                Email = Validation.CheckInput("Inserisci indirizzo e-mail: ", input =>
-                {
-                    return !string.IsNullOrWhiteSpace(input) && (input.Contains("@"));
-                }).ToLower();
-
-                Pass = Validation.CheckInput("Inserisci la password: ", input =>
-                {
-                    return !string.IsNullOrWhiteSpace(input);
-                });
-                //get vedere meglio che fann
-                accessoConcesso = CheckLogin(Email, Pass).GetAwaiter().GetResult();
-
-                if (accessoConcesso)
-                {
-                    Console.WriteLine("Accesso consentito. Benvenuto!");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Accesso negato. Riprova.");
-                }
-            } while (!accessoConcesso);
-            return false;
-        }
-
-
-        #endregion
-
-        #region private 
-        private async Task<bool> CheckLogin(string email, string password)
-        {
-            try
-            {
-                using HttpClient httpClient = new HttpClient();
-                var requestData = new { Email = email, Pass = password };
-
-                var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://localhost:18080/login", content);
-                //response.StatusCode.ToString().Contains("200")
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-            catch (Exception ex) when (ex is HttpRequestException || ex is JsonException)
-            {
-                Console.WriteLine("Si è verificato un errore durante la verifica dell'accesso: " + ex.Message);
-                return false;
-            }
-        }
-        #endregion
+      
 
     }
 }
