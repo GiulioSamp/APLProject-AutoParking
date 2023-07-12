@@ -101,6 +101,9 @@ int main()
         catch (exception e) {
             return crow::response(400, "L'utente non ha veicoli registrati!");
         }
+        catch (bad_exception e) {
+            return crow::response(400, "Utente non riconosciuto");
+        }
         });
 
     CROW_ROUTE(app, "/ruser").methods("POST"_method)

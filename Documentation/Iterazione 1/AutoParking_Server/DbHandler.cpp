@@ -62,8 +62,6 @@ std::string DbHandler::add_user(crow::json::rvalue x) {
     catch (sql::SQLException e)
     {
         cout << "Error message: " << e.what() << endl;
-        system("pause");
-        exit(1);
     }
 }
 
@@ -144,8 +142,8 @@ std::string DbHandler::register_park(crow::json::rvalue x,Parcheggio& p) {
 }
 
 crow::json::wvalue DbHandler::retrieveVehicleList(crow::json::rvalue x) {
-    res = stmt->executeQuery("SELECT targa, marca, modello, anno FROM utente JOIN veicolo WHERE email = '" + (std::string)x["Email"].s() + "'");
     crow::json::wvalue  veicoli;
+    res = stmt->executeQuery("SELECT targa, marca, modello, anno FROM veicolo join utente WHERE email = '" + (std::string)x["Email"].s() + "' AND id = utente_id");
     if (!res->next()) {   //guard clause per lanciare un eccezione se l'utente non ha veicoli
         throw std::exception();
     }
