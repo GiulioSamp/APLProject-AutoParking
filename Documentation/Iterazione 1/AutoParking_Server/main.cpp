@@ -27,8 +27,8 @@ int main()
         string result = Db.add_user(x);
         std::ostringstream os;
         os << x;
-        return crow::response{os.str()+" "+result};
-        });
+        return crow::response{os.str() + " " + result};
+            });
 
     CROW_ROUTE(app, "/vehicle").methods("POST"_method)
         ([](const crow::request& req) {
@@ -38,12 +38,12 @@ int main()
         }
         try {
             string result = Db.add_vehicle(x);
-             return crow::response(200, result);
-            }
+            return crow::response(200, result);
+        }
         catch (bad_exception e) {
             return crow::response{400, "User not logged in, invalid credentials"};
         }
-        });
+            });
 
     CROW_ROUTE(app, "/login").methods("POST"_method)
         ([](const crow::request& req) {
@@ -57,11 +57,11 @@ int main()
         }
         catch (bad_exception e) {
             cout << "Incorrect password" << endl;
-            return crow::response(400, "Invalid password");
+            return crow::response(400, "Password non valida");
         }
         catch (exception e) {
             cout << "Incorrent credentials" << endl;
-            return crow::response(400, "Login details not present in db");
+            return crow::response(400, "Credenziali non corrette");
         }
             });
 
@@ -84,6 +84,38 @@ int main()
         }
         catch (exception e) {
             return crow::response(400, "Vehicle registration id is not valid!");
+        }
+            });
+
+    CROW_ROUTE(app, "/rvehicle").methods("POST"_method)
+        ([](const crow::request& req) {
+        ostringstream os;
+        auto x = crow::json::load(req.body);
+        if (!x) {
+            return crow::response(400);
+        }
+        try {
+            auto veicoli = Db.retrieveVehicleList(x);           //Lista di mappa che contiene le informazioni dei veicoli dell'utente
+            return crow::response{200, veicoli};
+        }
+        catch (exception e) {
+            return crow::response(400, "L'utente non ha veicoli registrati!");
+        }
+        });
+
+    CROW_ROUTE(app, "/ruser").methods("POST"_method)
+        ([](const crow::request& req) {
+        ostringstream os;
+        auto x = crow::json::load(req.body);
+        if (!x) {
+            return crow::response(400);
+        }
+        try {
+            auto utente = Db.retrieveUser(x);           //Mappa che contiene le informazioni dell'utente
+            return crow::response{200, utente};
+        }
+        catch (exception e) {
+            return crow::response(400, "L'utente non è stato trovato");
         }
             });
 
