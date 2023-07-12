@@ -9,8 +9,8 @@ namespace ParkingClient
     internal class Program
     {
         static void Main(string[] args)
-        { 
-            Handler handler = new Handler();
+        {
+            Handler handler = Handler.Instance;
             bool ripeti = true;
             while (ripeti)
             {

@@ -13,17 +13,21 @@ namespace ParkingClient
         public string Modello { get; set; }
         public string Anno { get; set; }
         
-       
+
         public VehicleManager(string targa, string marca, string modello, string anno)
         {
             Targa = targa;
             Marca = marca;
             Modello = modello;
             Anno = anno;
+
         }
 
-        public VehicleManager() { }
-       
+        //public VehicleManager() { }
+        public VehicleManager()
+        {
+           
+        }
         public void EnterVehicle(UserManager utente)
          { //passo parametro utente che rappresenta il riferimento alla classe UserManager per poter usare check metodo is..
             
@@ -124,90 +128,34 @@ namespace ParkingClient
             }
         }
 
-
-       /*  /// <summary>
-        /// IMPLEMENTARE ADD PIU VEICOLI
-        /// </summary>
-        private List<Vehicle> vehicles = new List<Vehicle>();
-        /// <summary>
-        /// il metodo addnew,, crea un oggetto vehicle utilizzando costruttore predefinito
-        /// classe vehicle come innestata all'interno di questa classe utilizzata solo all'interno di questa
-        /// classe VehicleMAnager
-        /// </summary> 
-        public void AddNewVehicle()
+        /*public void AddNewVehicleInList()
         {
-            Vehicle newVehicle = new Vehicle();
+            
+                var veicolo = new VehicleManager();
 
-            newVehicle.Targa = Validation.CheckInput("Inserisci la targa: ", input =>
-                !string.IsNullOrWhiteSpace(input));
-
-            newVehicle.Marca = Validation.CheckInput("Inserisci la marca del veicolo: ", input =>
-                !string.IsNullOrWhiteSpace(input));
-
-            newVehicle.Modello = Validation.CheckInput("Inserisci il modello del veicolo: ", input =>
-                !string.IsNullOrWhiteSpace(input));
-
-            newVehicle.Anno = Validation.CheckInput("Inserisci l'anno del veicolo (aaaa): ", input =>
-                input.All(char.IsDigit) && input.Length == 4);
-
-            // nuovo veicolo alla lista
-            vehicles.Add(newVehicle);
-
-            // Invio dei dati del veicolo al server
-            Handler.InviaDatiAlServer(newVehicle, "/vehicle");
-        } 
-      
-
-        public static async Task ViewVehicleListFromServer()
-        {
-            try
-            {
-                using (var client = new HttpClient())
+                veicolo.Targa = Validation.CheckInput("\n\nInserisci la targa: ", input =>
                 {
-                    client.BaseAddress = new Uri("http://localhost:18080");
+                    return !string.IsNullOrWhiteSpace(input);
+                });
 
-                    //richiestaal server per ottenere la lista dei veicoli
-                    HttpResponseMessage response = await client.GetAsync("/api/endpointdafare");
+                veicolo.Marca = Validation.CheckInput("\nInserisci la marca del veicolo: ", input =>
+                {
+                    return !string.IsNullOrWhiteSpace(input);
+                });
 
-                    // Controlla se la richiesta ha avuto successo
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // read il contenuto della risposta JSON
-                        string json = await response.Content.ReadAsStringAsync();
+                veicolo.Modello = Validation.CheckInput("\nInserisci il modello del veicolo: ", input =>
+                {
+                    return !string.IsNullOrWhiteSpace(input);
+                });
 
-                        // il parsing del JSON per ottenere la lista dei veicoli
-                        List<Vehicle> vehicleList = JsonConvert.DeserializeObject<List<Vehicle>>(json);
+                veicolo.Anno = Validation.CheckInput("\nInserisci anno del veicolo (aaaa): ", input =>
+                {
+                    return input.All(char.IsDigit) && input.Length == 4;
+                });
 
-                        // scorre e visualizza le informazioni dei veicoli
-                        foreach (Vehicle vehicle in vehicleList)
-                        {
-                            Console.WriteLine($"Targa: {vehicle.Targa}");
-                            Console.WriteLine($"Marca: {vehicle.Marca}");
-                            Console.WriteLine($"Modello: {vehicle.Modello}");
-                            Console.WriteLine($"Anno: {vehicle.Anno}");
-                            Console.WriteLine();
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Si è verificato un errore durante la richiesta al server.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Si è verificato un errore: {ex.Message}");
-            }
-        }
-        private class Vehicle
-        {
-            public string Targa { get; set; }
-            public string Marca { get; set; }
-            public string Modello { get; set; }
-            public string Anno { get; set; }
-        } */
+                Veicoli.Add(veicolo); // Add il nuovo veicolo alla lista           
+            
+        }*/
 
-        
- 
     }
 }
