@@ -22,7 +22,8 @@ namespace ParkingClient
         private static Handler instance;
         private UserManager utente { get; set; }
         private VehicleManager veicolo { get; set; }
-       
+        List<VehicleManager> veicoli { get; set; }
+
         /// <summary>
         /// unico costruttore privato per pattern singleton
         /// </summary>
@@ -107,7 +108,8 @@ namespace ParkingClient
                 }
                 else
                 {
-                    throw new HttpRequestException($"Codice: {(int)response.StatusCode}, Motivo: {response.ReasonPhrase}");
+                    throw new HttpRequestException($"Codice: {(int)response.StatusCode}, Motivo: {response.ReasonPhrase}," +
+                        $" Motivo: {response.Content.ReadAsStringAsync().GetAwaiter().GetResult()}");
                 }
             } throw new ArgumentNullException("Errore carattere inserito");
         }
@@ -167,6 +169,7 @@ namespace ParkingClient
                 }
                 catch (HttpRequestException ex)
                 {
+                    
                     Console.WriteLine("Errore durante l'invio dei dati al server: " + ex.Message);
 
                 }
@@ -185,47 +188,77 @@ namespace ParkingClient
         {
             while (true)
             {
-                Console.Write($"\nBenvenuto/a!Seleziona un'opzione:");
-                // Stampa tutte le opzioni del menu solo se il parcheggio non è stato avviato
-                Console.WriteLine("\n1. Inizia parcheggio");
-                Console.WriteLine("2. Aggiungi nuovo veicolo");
-                Console.WriteLine("3. Modifica dati veicolo");
-                Console.WriteLine("4. Modifica dati utente");
-                Console.WriteLine("5. Visualizza dati utente");
-                Console.WriteLine("6. Visualizza dati veicoli");
-                Console.WriteLine("7. Logout");
-                //da c# v8 switch con le espressioni 
-                switch (Console.ReadLine())
+                try
                 {
-                    case "1":
-                        StartParking();
-                        break;
-                    case "2":
-                        veicolo.EnterVehicle(utente);
-                        InviaDatiAlServer("/vehicle", utente.Email, veicolo);
-                        break;
-                    case "3":
-                        veicolo.ModifyVehicle(utente);
-                        InviaDatiAlServer("/vehicle",null, veicolo);
-                        break;
-                    case "4":
-                        utente.EditUser();
-                        InviaDatiAlServer( "/register", null, utente);
-                        break;
-                    case "5":
-                        //ViewParameters(utente);
-                        RetrieveUser();
-                        break;
-                    case "6":
-                        //ViewParameters(veicolo);
-                        RetrieveVehicleList();
-                        break;
-                    case "7":
-                        Console.WriteLine("Menù terminato.");                       
-                        return;
-                    default:
-                        Console.WriteLine("Scelta non valida. Riprova.");
-                        break;
+                    Console.Write($"\nBenvenuto/a!Seleziona un'opzione:");
+                    // Stampa tutte le opzioni del menu solo se il parcheggio non è stato avviato
+                    Console.WriteLine("\n1. Inizia parcheggio");
+                    Console.WriteLine("2. Aggiungi nuovo veicolo");
+                    Console.WriteLine("3. Modifica dati veicolo");
+                    Console.WriteLine("4. Modifica dati utente");
+                    Console.WriteLine("5. Visualizza dati utente");
+                    Console.WriteLine("6. Visualizza dati veicoli");
+                    Console.WriteLine("7. Logout");
+                    //da c# v8 switch con le espressioni 
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            RetrieveVehicleList();
+                            Console.WriteLine("Seleziona numero veicolo da parcheggiare: ");
+                            //int.TryParse(Console.ReadLine(), out int i);
+                            //Console.WriteLine(i);
+                            //int s = i - 1;
+                            //Console.WriteLine(s);
+                            //veicolo = veicoli[s];
+                            int.TryParse(Console.ReadLine(), out int inputI);
+                            if (inputI >= 1 && inputI <= veicoli.Count)
+                            {
+                                int selectedI = inputI - 1;
+                                veicolo = veicoli[selectedI];
+                                Console.WriteLine("Hai selezionato il veicolo con targa: " + veicolo.Targa);
+                                StartParking();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Scelta non valido.");
+                            }
+                          break;
+                        case "2":
+                            veicolo.EnterVehicle(utente);
+                            InviaDatiAlServer("/vehicle", utente.Email, veicolo);
+                            break;
+                        case "3":
+                            veicolo.ModifyVehicle(utente);
+                            InviaDatiAlServer("/vehicle", null, veicolo);
+                            break;
+                        case "4":
+                            utente.EditUser();
+                            InviaDatiAlServer("/register", null, utente);
+                            break;
+                        case "5":
+                            //ViewParameters(utente);
+                            RetrieveUser();
+                            break;
+                        case "6":
+                            //ViewParameters(veicolo);
+                            RetrieveVehicleList();
+                            break;
+                        case "7":
+                            Console.WriteLine("Menù terminato.");
+                            return;
+                        default:
+                            Console.WriteLine("Scelta non valida. Riprova.");
+                            break;
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    Console.WriteLine("Errore durante l'invio dei dati al server: " + ex.Message);
+
+                }
+                catch (AuthenticationException ex)
+                {
+                    Console.WriteLine(ex.Message + " Login negato, Riprova.");
                 }
             }
         }
@@ -251,11 +284,12 @@ namespace ParkingClient
         }
         private bool StartParking()
         {
-            var Email = utente.Email;
-            var Targa = veicolo.Targa;
-            var requestData = new { Targa = Targa };
-            var response = InviaDatiAlServer("/park", Email, requestData);
+            //var Email = utente.Email;
+            //var Targa = veicolo.Targa;
+            var requestData = new { Targa = veicolo.Targa };
+            var response = InviaDatiAlServer("/park", utente.Email, requestData);
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            
             string[] parts = responseContent.Split(':');
 
             if (parts.Length >= 5)
@@ -318,17 +352,18 @@ namespace ParkingClient
                 Console.WriteLine($"Email: {utente.Email}");
                 Console.WriteLine($"Telefono: {utente.Telefono}");          
         }
+        
 
-       
+
         private void RetrieveVehicleList() {
             
             var response = InviaDatiAlServer<object>("/rvehicle", utente.Email);
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            List<VehicleManager> veicoli = JsonConvert.DeserializeObject<List<VehicleManager>>(responseContent);
+            veicoli = new (JsonConvert.DeserializeObject<List<VehicleManager>>(responseContent));
             int numv = 1;
             foreach (VehicleManager veicolo in veicoli)
             {
-            Console.WriteLine($"Veicolo{numv}: Targa: {veicolo.Targa}, Marca: {veicolo.Marca}, Modello: {veicolo.Modello}, Anno: {veicolo.Anno}");
+            Console.WriteLine($"Veicolo {numv}: Targa: {veicolo.Targa}, Marca: {veicolo.Marca}, Modello: {veicolo.Modello}, Anno: {veicolo.Anno}");
                 numv++;
             }
         }
