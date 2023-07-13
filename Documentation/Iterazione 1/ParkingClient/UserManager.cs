@@ -56,15 +56,7 @@ namespace ParkingClient
                 Pass = Validation.CheckInput("Inserisci la pass: ", input =>
                 {
                     return !string.IsNullOrWhiteSpace(input);
-                });
-
-                UserManager utente = builder.SetNome(Nome)
-                                          .SetCognome(Cognome)
-                                          .SetTelefono(Telefono)
-                                          .SetEmail(Email)
-                                          .SetPass(Pass)
-                                          .Build();
-           
+                });    
         }
         public bool IsUtenteInserito()
         {
