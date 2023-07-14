@@ -220,7 +220,7 @@ namespace ParkingClient
             Console.WriteLine($"Piano: {datiDes.piano}");
             Console.WriteLine($"Posto: {datiDes.posto}");
             Task.Delay(10000).GetAwaiter().GetResult();//10sec
-            Console.WriteLine("\nArrivederci!\n\n");
+            Console.WriteLine("\nPagamento ricevuto arrivederci!\n\n");
 
         }
 
