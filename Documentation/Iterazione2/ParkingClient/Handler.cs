@@ -45,212 +45,13 @@ namespace ParkingClient
             }
         }
 
-        #region public
+        
         //spostare su static classe commserver
-        public static HttpResponseMessage SendDataToServer<T>(string endpoint, string email = null, T oggetto = default(T))
-        {
-            string dtoJson = null;
+      
 
-            if (oggetto != null)
-            {
-                dtoJson = JsonConvert.SerializeObject(oggetto);
-            }
+ 
 
-            if (email != null)
-            {
-                if (dtoJson == null)
-                {
-                    // Crea un oggetto anonimo solo con l'email
-                    var emailObject = new { Email = email };
-                    dtoJson = JsonConvert.SerializeObject(emailObject);
-                }
-                else
-                {
-                    dtoJson = dtoJson.Replace("}", ",");
-                    dtoJson += $"\"Email\":\"{email}\"}}";
-                }
-            }
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:18080");
-                var content = new StringContent(dtoJson, Encoding.UTF8, "application/json");
-                var response = client.PostAsync(endpoint, content).GetAwaiter().GetResult();
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    return response;
-                }
-                else
-                {
-                    throw new HttpRequestException($"Codice: {(int)response.StatusCode}, Motivo: {response.ReasonPhrase}," +
-                        $" Motivo: {response.Content.ReadAsStringAsync().GetAwaiter().GetResult()}");
-                }
-            } throw new ArgumentNullException("Errore carattere inserito");
-        }
-        //classe meniiu con ogetti handler
-
-        public void Register() {
-            utente.UserRegistration();
-           
-            Console.Write("Utente registrato, procediamo con la registrazione del veicolo\n");
-            veicolo.EnterVehicle(utente);
-            SendDataToServer("/register", oggetto: utente);
-            SendDataToServer("/vehicle", utente.Email, veicolo);
-
-            Console.Write("\nHai inserito i seguenti dati:\n");
-            ViewParameters(utente);
-            ViewParameters(veicolo);
-        }
-       /* public void EntryMenu()
-        {
-            //utente = new UserManager();
-            //veicolo = new VehicleManager();
-            while (true)
-            {
-                try
-                {
-                    bool utenteRegistrato = false;
-                    Console.WriteLine("1. Registrazione");
-                    Console.WriteLine("2. Login");
-                    Console.WriteLine("3. Ritiro veicolo");
-                    Console.Write("\nDigita il numero dell'operazione desiderata tra quelle elencate sopra: ");
-                    int.TryParse(Console.ReadLine(), out int sceltaMenu);
-                    switch (sceltaMenu)
-                    {
-                        case 1:
-                            if (utenteRegistrato)
-                            {
-                                Console.WriteLine("Utente già registrato.");
-                            }
-                            else
-                            {
-                                utente.UserRegistration();
-                                SendDataToServer("/register", oggetto: utente);
-                                Console.Write("Utente registrato, procediamo con la registrazione del veicolo\n");
-                                veicolo.EnterVehicle(utente);
-                                SendDataToServer("/register", oggetto: utente);
-                                SendDataToServer("/vehicle", utente.Email, veicolo);
-
-                                Console.Write("\nHai inserito i seguenti dati:\n");
-                                ViewParameters(utente);
-                                ViewParameters(veicolo);
-                                utenteRegistrato = true; //?????????????
-                                InternalMenu();
-                            }
-                            break;
-
-                        case 2:
-                            if (DoLogin())
-                            {
-                                InternalMenu();
-                                utenteRegistrato = true;
-                            }
-                            break;
-                        case 3:
-
-                            break;
-                        default:
-                            Console.WriteLine("Scelta non valida. Riprova.");
-                            break;
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-
-                    Console.WriteLine("Errore durante l'invio dei dati al server: " + ex.Message);
-
-                }
-                catch (AuthenticationException ex)
-                {
-                    Console.WriteLine(ex.Message + " Login negato, Riprova.");
-                }
-            }
-        }
-
-
-        #endregion
-
-        #region private 
-        private void InternalMenu()
-        {
-            while (true)
-            {
-                try
-                {
-                    Console.Write($"\nBenvenuto/a!Seleziona un'opzione:");
-                    // Stampa tutte le opzioni del menu solo se il parcheggio non è stato avviato
-                    Console.WriteLine("\n1. Inizia parcheggio");
-                    Console.WriteLine("2. Aggiungi nuovo veicolo");
-                    Console.WriteLine("3. Modifica dati veicolo");
-                    Console.WriteLine("4. Modifica dati utente");
-                    Console.WriteLine("5. Visualizza dati utente");
-                    Console.WriteLine("6. Visualizza dati veicoli");
-                    Console.WriteLine("7. Logout");
-                    //da c# v8 switch con le espressioni 
-                    switch (Console.ReadLine())
-                    {
-                        case "1":
-                            RetrieveVehicleList();
-                            Console.WriteLine("Seleziona numero veicolo da parcheggiare: ");
-                            //int.TryParse(Console.ReadLine(), out int i);
-                            //Console.WriteLine(i);
-                            //int s = i - 1;
-                            //Console.WriteLine(s);
-                            //veicolo = veicoli[s];
-                            int.TryParse(Console.ReadLine(), out int inputI);
-                            if (inputI >= 1 && inputI <= veicoli.Count)
-                            {
-                                int selectedI = inputI - 1;
-                                veicolo = veicoli[selectedI];
-                                Console.WriteLine("Hai selezionato il veicolo con targa: " + veicolo.Targa);
-                                StartParking();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Scelta non valido.");
-                            }
-                            break;
-                        case "2":
-                            veicolo.EnterVehicle(utente);
-                            SendDataToServer("/vehicle", utente.Email, veicolo);
-                            break;
-                        case "3":
-                            veicolo.ModifyVehicle(utente);
-                            SendDataToServer("/vehicle", null, veicolo);
-                            break;
-                        case "4":
-                            utente.EditUser();
-                            SendDataToServer("/register", null, utente);
-                            break;
-                        case "5":
-                            //ViewParameters(utente);
-                            RetrieveUser();
-                            break;
-                        case "6":
-                            //ViewParameters(veicolo);
-                            RetrieveVehicleList();
-                            break;
-                        case "7":
-                            Console.WriteLine("Menù terminato.");
-                            return;
-                        default:
-                            Console.WriteLine("Scelta non valida. Riprova.");
-                            break;
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    Console.WriteLine("Errore durante l'invio dei dati al server: " + ex.Message);
-
-                }
-                catch (AuthenticationException ex)
-                {
-                    Console.WriteLine(ex.Message + " Login negato, Riprova.");
-                }
-            }
-        } */
-        //posso togliere
+        #region private
         private void ViewParameters<T>(T oggetto)
         {
             Type tipoOggetto = typeof(T);
@@ -271,25 +72,15 @@ namespace ParkingClient
             }
 
         }
-        public bool StartParking()
+        private bool StartParking()
         {
-            //var Email = utente.Email;
-            //var Targa = veicolo.Targa;
             var requestData = new { Targa = veicolo.Targa };
-            var response = SendDataToServer("/park", utente.Email, requestData);
+            var response = Validation.SendDataToServer("/park", utente.Email, requestData);
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
-            string[] parts = responseContent.Split(':');
-
-            if (parts.Length >= 5)
+            
+            if (!string.IsNullOrEmpty(responseContent))
             {
-                string user = parts[1].Split(' ')[1].Trim();
-                string parkedCar = parts[2].Split(' ')[1].Trim();
-                string floor = parts[3].Split(' ')[1].Trim();
-                string spot = parts[4].Split(' ')[1].Trim();
-
-                Console.WriteLine($"Parcheggio effettuato per: {user} Targa: {parkedCar} Piano: {floor} Posto: {spot}");
-
+                Console.WriteLine(responseContent);
                 Console.WriteLine("Parcheggio completato, grazie");
                 return true;
             }
@@ -300,11 +91,27 @@ namespace ParkingClient
             }
 
         }
+
+        #endregion
+
+        #region public
+        public void Register()
+        {
+            utente.UserRegistration();
+
+            Console.Write("Utente registrato, procediamo con la registrazione del veicolo\n");
+            veicolo.EnterVehicle(utente);
+            Validation.SendDataToServer("/register", oggetto: utente);
+            Validation.SendDataToServer("/vehicle", utente.Email, veicolo);
+
+            Console.Write("\nHai inserito i seguenti dati:\n");
+            ViewParameters(utente);
+            ViewParameters(veicolo);
+        }
         public bool DoLogin()
         {
             Console.WriteLine("Benvenuto! Effettua il login.");
-            //bool accessoConcesso = false;
-
+  
             utente.Email = Validation.CheckInput("Inserisci indirizzo e-mail: ", input =>
             {
                 return !string.IsNullOrWhiteSpace(input) && (input.Contains("@"));
@@ -315,7 +122,7 @@ namespace ParkingClient
                 return !string.IsNullOrWhiteSpace(input);
             });
             var requestData = new { Email = utente.Email, Pass = utente.Pass };
-            var response = SendDataToServer("/login", oggetto: requestData);
+            var response = Validation.SendDataToServer("/login", oggetto: requestData);
             Console.WriteLine("Accesso consentito. Benvenuto!");
             Console.Write("\nEcco i tuoi dati account:\n");
             //Email = utente.Email;
@@ -328,7 +135,7 @@ namespace ParkingClient
         public void RetrieveUser()
         {
 
-            var response = SendDataToServer<object>("/ruser", utente.Email);
+            var response = Validation.SendDataToServer<object>("/ruser", utente.Email);
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             //Console.WriteLine(responseContent); 
             dynamic utenteDeserializzato = JsonConvert.DeserializeObject(responseContent);
@@ -344,7 +151,7 @@ namespace ParkingClient
 
         public void RetrieveVehicleList() {
 
-            var response = SendDataToServer<object>("/rvehicle", utente.Email);
+            var response = Validation.SendDataToServer<object>("/rvehicle", utente.Email);
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             veicoli = new(JsonConvert.DeserializeObject<List<VehicleManager>>(responseContent));
             int numv = 1;
@@ -373,32 +180,53 @@ namespace ParkingClient
         }
         public void RegisterVehicle(){
             veicolo.EnterVehicle(utente);
-            SendDataToServer("/vehicle", utente.Email, veicolo);
+            Validation.SendDataToServer("/vehicle", utente.Email, veicolo);
     }
         public void ModdVehicle()
         {
             veicolo.ModifyVehicle(utente);
-            SendDataToServer("/vehicle", null, veicolo);
+            Validation.SendDataToServer("/vehicle", null, veicolo);
+        }
+        public void ModUser() 
+        {
+            utente.EditUser();
+            Validation.SendDataToServer("/register", null, utente);
         }
         public void Takevehicle()
         {
-            Console.WriteLine("Benvenuto!Grazie per aver sostato");
-            bool accessoConcesso = false;
-            
-            var IDUtente = Validation.CheckInput("Inserisci IDTicket: ", input =>
+            Console.WriteLine("Benvenuto! Grazie per aver sostato");
+            string Id = Validation.CheckInput("Inserisci IDTicket: ", input =>
             {
-                return !string.IsNullOrWhiteSpace(input);
+                return input.All(char.IsDigit);
             });
 
-            var requestData = new { IDTicket = IDUtente };
-            var response = SendDataToServer("/register", oggetto: requestData);
+            var requestData = new { Id = Id };
+            var response = Validation.SendDataToServer("/pay", oggetto: requestData);
             string responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            Console.WriteLine(responseContent);
-            Console.WriteLine("Arrivederci!");//<---Gestire Stampa del datp
+            dynamic pay = JsonConvert.DeserializeObject(responseContent);            
+            if (pay != null && pay.costo != null)
+            {
+                double costo = Convert.ToDouble(pay.costo);
+
+                string costoFormatted = costo.ToString("0.00");
+                Console.WriteLine($"Costo del parcheggio: {costoFormatted}");
+            }
+            var responseFin = Validation.SendDataToServer("/endpark", oggetto: requestData);
+            string responseCFin = responseFin.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            Console.WriteLine("Grazie per aver sostato qui");
+            dynamic datiDes = JsonConvert.DeserializeObject(responseCFin); // Correzione qui
+
+            Console.WriteLine($"Id: {datiDes.id}");
+            Console.WriteLine($"Piano: {datiDes.piano}");
+            Console.WriteLine($"Posto: {datiDes.posto}");
+            Task.Delay(10000).GetAwaiter().GetResult();//10sec
+            Console.WriteLine("\nArrivederci!\n\n");
 
         }
+
     }
+}
         #endregion
     
-}
+
 

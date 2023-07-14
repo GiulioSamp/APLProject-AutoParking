@@ -12,8 +12,7 @@ namespace ParkingClient
     {
         Handler handler = Handler.Instance;
         public void EntryMenu()
-        {
-            
+        {           
             while (true)
             {
                 try
@@ -40,7 +39,7 @@ namespace ParkingClient
                             }
                             break;
                         case 3:
-
+                            handler.Takevehicle();
                             break;
                         default:
                             Console.WriteLine("Scelta non valida. Riprova.");
@@ -89,15 +88,12 @@ namespace ParkingClient
                             handler.ModdVehicle();
                             break;
                         case "4":
-                           // utente.EditUser();
-                            //SendDataToServer("/register", null, utente);
+                          handler.ModUser();
                             break;
-                        case "5":
-                            
+                        case "5":                          
                             handler.RetrieveUser();
                             break;
-                        case "6":
-                            
+                        case "6":                          
                             handler.RetrieveVehicleList();
                             break;
                         case "7":
