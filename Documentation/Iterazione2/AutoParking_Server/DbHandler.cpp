@@ -107,6 +107,8 @@ std::string DbHandler::check_user(crow::json::rvalue x) {
 }
 
 std::string DbHandler::add_vehicle(crow::json::rvalue x) {
+    res = stmt->executeQuery("SELECT targa FROM veicolo WHERE targa = '" + (std::string)x["Targa"].s() + "'");
+    if (!res->next()) {
         res = stmt->executeQuery("SELECT id, email, pass FROM utente WHERE email = '" + (std::string)x["Email"].s() + "'");
         if (res->next()) {
             pstmt = con->prepareStatement("INSERT INTO veicolo(targa, marca, modello, anno, utente_id) VALUES(?,?,?,?,?)");
@@ -117,12 +119,15 @@ std::string DbHandler::add_vehicle(crow::json::rvalue x) {
             pstmt->setInt(5, res->getInt(1));
             pstmt->execute();
             std::cout << "One row inserted." << endl;
-            return "Success, added car: "+ (std::string)x["Targa"].s()+" to user: "+ (std::string)x["Email"].s();
+            return "Success, added car: " + (std::string)x["Targa"].s() + " to user: " + (std::string)x["Email"].s();
         }
-    else
-    {
-        throw std::bad_exception();
-        return "Invalid User, can't proceed!";
+        else
+        {
+            throw std::bad_exception();
+        }
+    }
+    else {
+        throw std::exception();
     }
 }
 
@@ -183,13 +188,14 @@ std::string DbHandler::register_park(crow::json::rvalue x, Parcheggio& p) {
     }
 }
 
-crow::json::wvalue DbHandler::retrieve_vehicle(crow::json::rvalue x) {
+crow::json::wvalue DbHandler::retrieve_vehicle(crow::json::rvalue x, Parcheggio& p) {
     crow::json::wvalue result;
     res = stmt->executeQuery("SELECT n_piano, n_posto, id_parcheggio FROM utente_parcheggiato WHERE id_parcheggio = '" + (std::string)x["Id"].s() + "'");
     if (res->next()) {
         result["piano"] = res->getString(1);
         result["posto"] = res->getString(2);
         result["id"] = res->getInt(3);
+        p.liberaPosto(stoi(res->getString(1)), stoi(res->getString(2)));
         pstmt = con->prepareStatement("DELETE FROM utente_parcheggiato WHERE id_parcheggio = '" + (std::string)x["Id"].s() + "'");
         pstmt->execute();
         return result;

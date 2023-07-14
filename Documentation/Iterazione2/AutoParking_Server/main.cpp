@@ -45,6 +45,9 @@ int main()
         catch (bad_exception e) {
             return crow::response{400, "Credenziali non valide"};
         }
+        catch (exception e) {
+            return crow::response(400, "Veicolo già inserito");
+        }
             });
 
     CROW_ROUTE(app, "/login").methods("POST"_method)
@@ -147,13 +150,13 @@ int main()
         if (!x) {
             return crow::response(400);
         }
-        //try {
-            auto res = Db.retrieve_vehicle(x);
+        try {
+            auto res = Db.retrieve_vehicle(x, Park);
             return crow::response{200, res};
-        //}
-        //catch (exception e) {
-        //    return crow::response(400, "l'id del parcheggio non è stato trovato");
-        //}
+        }
+        catch (exception e) {
+            return crow::response(400, "l'id del parcheggio non è stato trovato");
+        }
             });
 
     app.bindaddr("127.0.0.1").port(18080)

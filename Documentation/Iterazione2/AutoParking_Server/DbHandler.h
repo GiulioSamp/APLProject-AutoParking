@@ -31,7 +31,7 @@ public:
 	string check_user(crow::json::rvalue);
 	string register_park(crow::json::rvalue,Parcheggio&);
 	crow::json::wvalue resolve_payment(crow::json::rvalue);
-	crow::json::wvalue retrieve_vehicle(crow::json::rvalue);
+	crow::json::wvalue retrieve_vehicle(crow::json::rvalue, Parcheggio&);
 	crow::json::wvalue retrieveVehicleList(crow::json::rvalue);
 	crow::json::wvalue retrieveUser(crow::json::rvalue);
 };
