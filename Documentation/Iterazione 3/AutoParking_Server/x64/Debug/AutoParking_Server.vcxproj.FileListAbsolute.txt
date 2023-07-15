@@ -1,0 +1,2 @@
+C:\Users\Giuli\source\repos\AutoParking_Server\x64\Debug\AutoParking_Server.exe
+C:\Users\auror\Source\Repos\APLProject-AutoParking\Documentation\Iterazione 1\AutoParking_Server\x64\Debug\AutoParking_Server.exe
