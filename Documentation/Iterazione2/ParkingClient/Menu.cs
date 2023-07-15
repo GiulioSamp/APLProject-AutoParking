@@ -8,39 +8,38 @@ using System.Threading.Tasks;
 
 namespace ParkingClient
 {
-    internal class Menu
+     internal class Menu
     {
         Handler handler = Handler.Instance;
+
         public void EntryMenu()
-        {           
+        {
             while (true)
             {
                 try
                 {
-                    bool utenteRegistrato = false;
-                    Console.WriteLine("1. Registrazione");
-                    Console.WriteLine("2. Login");
-                    Console.WriteLine("3. Ritiro veicolo");
-                    Console.Write("\nDigita il numero dell'operazione desiderata tra quelle elencate sopra: ");
-                    int.TryParse(Console.ReadLine(), out int sceltaMenu);
+                    PrintEMenu();
+
+                    int sceltaMenu = GetMenuChoice();
+
                     switch (sceltaMenu)
                     {
                         case 1:
-                             handler.Register();
-                               
-                                InternalMenu();
-
+                            handler.Register();
+                            InternalMenu();
                             break;
 
                         case 2:
                             if (handler.DoLogin())
                             {
-                                InternalMenu();                             
+                                InternalMenu();
                             }
                             break;
+
                         case 3:
                             handler.Takevehicle();
                             break;
+
                         default:
                             Console.WriteLine("Scelta non valida. Riprova.");
                             break;
@@ -48,9 +47,7 @@ namespace ParkingClient
                 }
                 catch (HttpRequestException ex)
                 {
-
                     Console.WriteLine("Errore durante l'invio dei dati al server: " + ex.Message);
-
                 }
                 catch (AuthenticationException ex)
                 {
@@ -58,47 +55,48 @@ namespace ParkingClient
                 }
             }
         }
-
+        
+        #region private
         private void InternalMenu()
         {
             while (true)
             {
                 try
                 {
-                    Console.Write($"\nBenvenuto/a!Seleziona un'opzione:");
-                    // Stampa tutte le opzioni del menu solo se il parcheggio non è stato avviato
-                    Console.WriteLine("\n1. Inizia parcheggio");
-                    Console.WriteLine("2. Aggiungi nuovo veicolo");
-                    Console.WriteLine("3. Modifica dati veicolo");
-                    Console.WriteLine("4. Modifica dati utente");
-                    Console.WriteLine("5. Visualizza dati utente");
-                    Console.WriteLine("6. Visualizza dati veicoli");
-                    Console.WriteLine("7. Logout");
-                    //da c# v8 switch con le espressioni 
-                    switch (Console.ReadLine())
+                    PrintIMenu();
+
+                    string scelta = Console.ReadLine();
+
+                    switch (scelta)
                     {
                         case "1":
                             handler.ChoiceVehicleListForPark();
                             break;
+
                         case "2":
                             handler.RegisterVehicle();
-
                             break;
+
                         case "3":
                             handler.ModdVehicle();
                             break;
+
                         case "4":
-                          handler.ModUser();
+                            handler.ModUser();
                             break;
-                        case "5":                          
+
+                        case "5":
                             handler.RetrieveUser();
                             break;
-                        case "6":                          
+
+                        case "6":
                             handler.RetrieveVehicleList();
                             break;
+
                         case "7":
                             Console.WriteLine("Menù terminato.");
                             return;
+
                         default:
                             Console.WriteLine("Scelta non valida. Riprova.");
                             break;
@@ -107,7 +105,6 @@ namespace ParkingClient
                 catch (HttpRequestException ex)
                 {
                     Console.WriteLine("Errore durante l'invio dei dati al server: " + ex.Message);
-
                 }
                 catch (AuthenticationException ex)
                 {
@@ -116,5 +113,32 @@ namespace ParkingClient
             }
         }
 
+        private void PrintEMenu()
+        {
+            Console.WriteLine("1. Registrazione");
+            Console.WriteLine("2. Login");
+            Console.WriteLine("3. Ritiro veicolo");
+            Console.Write("\nDigita il numero dell'operazione desiderata tra quelle elencate sopra: ");
+        }
+
+        private int GetMenuChoice()
+        {
+            int.TryParse(Console.ReadLine(), out int sceltaMenu);
+            return sceltaMenu;
+        }
+
+        private void PrintIMenu()
+        {
+            Console.WriteLine($"\nBenvenuto/a! Seleziona un'opzione:");
+            Console.WriteLine("1. Inizia parcheggio");
+            Console.WriteLine("2. Aggiungi nuovo veicolo");
+            Console.WriteLine("3. Modifica dati veicolo");
+            Console.WriteLine("4. Modifica dati utente");
+            Console.WriteLine("5. Visualizza dati utente");
+            Console.WriteLine("6. Visualizza dati veicoli");
+            Console.WriteLine("7. Logout");
+            Console.Write("Scelta: ");
+        }
+        #endregion
     }
 }
