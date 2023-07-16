@@ -1,4 +1,5 @@
-from classe1 import Endpoint
+from Endpoint import Endpoint
+
 import json
 
 
@@ -11,7 +12,7 @@ class Menu:
             case 1:
                 self.endpoint.get_occupied_spots_all_floors()
             case 2:
-                self.endpoint.other_method1()
+                self.endpoint.get_occupied_spots_forf()
             case 3:
                 self.endpoint.other_method2()
             case _:
