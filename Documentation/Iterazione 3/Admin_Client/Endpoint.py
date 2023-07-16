@@ -79,6 +79,7 @@ class Endpoint:
                 print("Errore nella gestione della risposta del server:", e)
                 # return None
  
+ #uc7
 
     def get_gain(self):
         endpoint = "/gain"
@@ -87,24 +88,7 @@ class Endpoint:
             try:
                 data = json.loads(response)  # Decodifica la risposta JSON
                 if isinstance(data, list) and len(data) > 0:
-                    #inserire l'anno, il mese e il giorno
-                    year = int(input("Inserisci l'anno: "))
-                    month = int(input("Inserisci il mese: "))
-                    day = int(input("Inserisci il giorno: "))
-                    user_date = datetime.date(year, month, day)
-                    locale.setlocale(locale.LC_ALL, "") #formattazione locale ,
-                    print("Importi:")
-                    for profit in data:
-                        if "Data" in profit:
-                            # la parte "aaaa-mm-gg" dal campo "Data" dell'elemento
-                            data_part = profit["Data"].split(" ")[0]
-                            profit_date = datetime.datetime.strptime(data_part, "%Y-%m-%d").date()
-                            if profit_date == user_date:
-                                if "Importo" in profit:
-                                    importo = profit["Importo"]                                    
-                                    importo_formattato = locale.format_string("%.2f", float(importo), grouping=True)
-                                    print(importo_formattato)
-                                    
+                    self.visualizza_incasso(data)  # Passa 'data' come parametro
                 else:
                     print("La risposta non contiene dati di guadagno.")
             except json.JSONDecodeError as e:
@@ -115,8 +99,77 @@ class Endpoint:
                 print("Errore nella gestione della risposta del server:", e)
         else:
             print("Errore nella richiesta dei posti occupati.")
-            
-           
+    
+    def visualizza_incasso(self, data):
+        scelta = input("Scegli l'opzione di visualizzazione dell'incasso:\n 1-totale / 2-giornaliero / 3-mensile / 4-annuale: ")
+    
+        try:
+            scelta = int(scelta)
+        except ValueError:
+            raise ValueError("Opzione non valida.")
+    
+        if scelta == 1:
+            self.visualizza_incasso_totale(data)  
+        elif scelta == 2:
+            self.visualizza_incasso_giornaliero(data)  
+        elif scelta == 3:
+            self.visualizza_incasso_mensile(data)  
+        elif scelta == 4:
+            self.visualizza_incasso_annuale(data)  
+        else:
+            raise ValueError("Opzione non valida.") #throw
+    
+    def visualizza_incasso_totale(self, data):  
+        totale = 0.0
+        for profit in data:
+            if "Importo" in profit:
+                importo = profit["Importo"]
+                totale += float(importo)
+        importo_formattato = locale.format_string("%.2f", totale, grouping=True)
+        print("Incasso totale:", importo_formattato)
+    
+    def visualizza_incasso_giornaliero(self, data):  
+        year = int(input("Inserisci l'anno: "))
+        month = int(input("Inserisci il mese: "))
+        day = int(input("Inserisci il giorno: "))
+        user_date = datetime.date(year, month, day)
+        incasso_giornaliero = 0.0
+        for profit in data:
+            if "Data" in profit:
+                data_part = profit["Data"].split(" ")[0]
+                profit_date = datetime.datetime.strptime(data_part, "%Y-%m-%d").date()
+                if profit_date == user_date and "Importo" in profit:
+                    importo = profit["Importo"]
+                    incasso_giornaliero += float(importo)
+        importo_formattato = locale.format_string("%.2f", incasso_giornaliero, grouping=True)
+        print("Incasso giornaliero:", importo_formattato)
+    
+    def visualizza_incasso_mensile(self, data): 
+        year = int(input("Inserisci l'anno: "))
+        month = int(input("Inserisci il mese: "))
+        incasso_mensile = 0.0
+        for profit in data:
+            if "Data" in profit:
+                data_part = profit["Data"].split(" ")[0]
+                profit_date = datetime.datetime.strptime(data_part, "%Y-%m-%d").date()
+                if profit_date.year == year and profit_date.month == month and "Importo" in profit:
+                    importo = profit["Importo"]
+                    incasso_mensile += float(importo)
+        importo_formattato = locale.format_string("%.2f", incasso_mensile, grouping=True)
+        print("Incasso mensile:", importo_formattato)
+    
+    def visualizza_incasso_annuale(self, data):  
+        year = int(input("Inserisci l'anno: "))
+        incasso_annuale = 0.0
+        for profit in data:
+            if "Data" in profit:
+                data_part = profit["Data"].split(" ")[0]
+                profit_date = datetime.datetime.strptime(data_part, "%Y-%m-%d").date()
+                if profit_date.year == year and "Importo" in profit:
+                    importo = profit["Importo"]
+                    incasso_annuale += float(importo)
+        importo_formattato = locale.format_string("%.2f", incasso_annuale, grouping=True)
+        print("Incasso annuale:", importo_formattato)
 
 
 
