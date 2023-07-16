@@ -278,4 +278,24 @@ crow::json::wvalue DbHandler::retrieveVehicleList(crow::json::rvalue x) {
     return veicoli;
  }
 
+crow::json::wvalue DbHandler::retrieveProfit() {
+    crow::json::wvalue  profit;
+    res = stmt->executeQuery("SELECT * FROM guadagno");
+    if (!res->next()) {   //guard clause per lanciare un eccezione se l'utente non ha veicoli
+        throw std::exception();
+    }
+    int i = 0;
+    res->first();  //riporto il result set al primo valore
+    do {
+        profit[i]["IdTransazione"] = res->getInt(1);
+        profit[i]["Importo"] = std::to_string(res->getDouble(2));
+        profit[i]["Utente"] = to_string(res->getInt(3));
+        profit[i]["Targa"] = res->getString(4);
+        profit[i]["Data"] = res->getString(5);
+        profit[i]["Tariffa"] = to_string(res->getInt(6));
+        i++;
+    } while (res->next());
+    return profit;
+}
+
 

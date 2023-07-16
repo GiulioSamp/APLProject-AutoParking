@@ -155,9 +155,18 @@ int main()
         }
             });
 
-    CROW_ROUTE(app, "/spots").methods("GET"_method)
+    CROW_ROUTE(app, "/spots").methods("POST"_method)
         ([](const crow::request& req) {
-        return crow::response(200, Park.stampaPosti());
+        string res = Park.stampaPosti();
+        crow::json::wvalue posti;
+        posti["result"] = res;
+        return crow::response(200, posti);
+            });
+
+    CROW_ROUTE(app, "/gain").methods("POST"_method)
+        ([](const crow::request& req) {
+        auto res = Db.retrieveProfit();
+        return crow::response(200, res);
             });
 
     app.bindaddr("127.0.0.1").port(18080)
