@@ -80,10 +80,6 @@ int main()
             string result = Db.register_park(x, Park);
             return crow::response(200, result);
         }
-        catch (logic_error e) {
-            cout << e.what() << endl;
-            return crow::response(400, e.what());
-        }
         catch (bad_exception e) {
             return crow::response(400, "Fallimento, veicolo già parcheggiato");
         }
@@ -159,10 +155,10 @@ int main()
         }
             });
 
-    /*CROW_ROUTE(app, "/profit").methods("GET"_method)
+    CROW_ROUTE(app, "/spots").methods("GET"_method)
         ([](const crow::request& req) {
-        
-            });*/
+        return crow::response(200, Park.stampaPosti());
+            });
 
     app.bindaddr("127.0.0.1").port(18080)
         .multithreaded()

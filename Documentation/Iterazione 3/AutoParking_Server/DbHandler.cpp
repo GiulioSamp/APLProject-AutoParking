@@ -31,8 +31,8 @@ std::string DbHandler::start() {
         con = driver->connect(server, username, password);
         con->setSchema("autoparkdb");
         stmt = con->createStatement();
+        stmt->execute("DROP TABLE IF EXISTS guadagno");
         stmt->execute("DROP TABLE IF EXISTS utente_parcheggiato");  //Cancellazione tabelle per facilitare fase di testing
-        stmt->execute("DROP TABLE IF EXISTS guadagni");
         stmt->execute("DROP TABLE IF EXISTS veicolo");
         stmt->execute("DROP TABLE IF EXISTS utente");
         stmt->execute("DROP TABLE IF EXISTS tariffa");
@@ -49,7 +49,7 @@ std::string DbHandler::start() {
             " FOREIGN KEY (utente) REFERENCES utente(id) ON DELETE CASCADE,"
             " FOREIGN KEY (targa) REFERENCES veicolo(targa) ON DELETE CASCADE ON UPDATE CASCADE,"
             " FOREIGN KEY (tariffa) REFERENCES tariffa(id) ON DELETE CASCADE);");
-        stmt->execute("CREATE TABLE guadagni("
+        stmt->execute("CREATE TABLE guadagno("
             " id_transazione serial PRIMARY KEY,"
             " importo DOUBLE NOT NULL,"
             " utente BIGINT UNSIGNED, targa VARCHAR(40),"
@@ -169,8 +169,8 @@ std::string DbHandler::register_park(crow::json::rvalue x, Parcheggio& p) {
         res = stmt->executeQuery("SELECT id, email, pass FROM utente JOIN veicolo WHERE email = '" + (std::string)x["Email"].s()
             + "' AND targa = '" + (std::string)x["Targa"].s() + "'");
         if (res->next()) {
-            std::tuple<int, int> places = p.occupaPosto();
-            if (std::get<0>(places) != NULL) {
+            try {
+                std::tuple<int, int> places = p.occupaPosto();
                 pstmt = con->prepareStatement("INSERT INTO utente_parcheggiato(n_posto, n_piano, utente, targa, tariffa) VALUES(?,?,?,?,?)");
                 pstmt->setString(1, std::to_string(std::get<1>(places)));
                 pstmt->setString(2, std::to_string(std::get<0>(places)));
@@ -185,13 +185,13 @@ std::string DbHandler::register_park(crow::json::rvalue x, Parcheggio& p) {
                     + "\n Posto: " + std::to_string(std::get<1>(places))
                     + "\nid parcheggio per il ritiro: " + std::to_string(get_park_id((std::string)x["Targa"].s()));
             }
-            else {
-                throw std::logic_error("Park is full!");  //Eccezione se il parcheggio non ha più posti
+            catch (std::bad_exception e) {
+                return "Parcheggio Pieno!";
             }
         }
-        else {
-            throw std::exception(); //eccezione se nessun veicolo con la targa data è stato trovato
-        }
+    else {
+        throw std::exception(); //eccezione se nessun veicolo con la targa data è stato trovato
+    }
     }
     else
     {
@@ -203,6 +203,7 @@ crow::json::wvalue DbHandler::retrieve_vehicle(crow::json::rvalue x, Parcheggio&
     crow::json::wvalue result;
     res = stmt->executeQuery("SELECT n_piano, n_posto, id_parcheggio FROM utente_parcheggiato WHERE id_parcheggio = '" + (std::string)x["Id"].s() + "'");
     if (res->next()) {
+        pstmt->execute();
         result["piano"] = res->getString(1);
         result["posto"] = res->getString(2);
         result["id"] = res->getInt(3);
@@ -219,13 +220,21 @@ crow::json::wvalue DbHandler::retrieve_vehicle(crow::json::rvalue x, Parcheggio&
 
 crow::json::wvalue DbHandler::resolve_payment(crow::json::rvalue x) {
     crow::json::wvalue result;
-    res = stmt->executeQuery("SELECT data_inizio, tariffa FROM utente_parcheggiato WHERE id_parcheggio = '" + (std::string)x["Id"].s() + "'");
+    res = stmt->executeQuery("SELECT data_inizio, tariffa, targa, utente FROM utente_parcheggiato WHERE id_parcheggio = '" + (std::string)x["Id"].s() + "'");
     if (res->next()) {
         string date = res->getString(1);
         DataRes data(date);
-        res = stmt->executeQuery("SELECT val_fisso, aggiunta_ore FROM tariffa WHERE id = '" + std::to_string(res->getInt(2)) + "'");
+        int user = res->getInt("utente");
+        string car = res->getString("targa");
+        int tariffa = res->getInt(2);
+        res = stmt->executeQuery("SELECT val_fisso, aggiunta_ore, id FROM tariffa WHERE id = '" + std::to_string(res->getInt(2)) + "'");
         while (res->next()) {
             double n = PaymentResolver::getInstance().pay(res->getDouble(1), res->getDouble(2), data);
+            pstmt = con->prepareStatement("INSERT INTO guadagno(importo, utente, targa, tariffa) VALUES(?,?,?,?)");
+            pstmt->setDouble(1, n);
+            pstmt->setInt(2, user);
+            pstmt->setString(3, car);
+            pstmt->setInt(4, tariffa);
             result["costo"] = n;
             return result;
         }

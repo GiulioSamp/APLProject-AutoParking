@@ -10,7 +10,7 @@ class Piano {
 public:
 	Piano(int, int);
 	~Piano();
-	void stampa();
+	std::string stampa();
 	int occupaPosto();
 	void liberaPosto(int);
 	int sizeofPosti();

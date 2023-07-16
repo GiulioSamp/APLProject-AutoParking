@@ -8,7 +8,7 @@
 
 Parcheggio::Parcheggio(int num_piani, int num_posti) {
 	stato = true;
-	for (int i = 1; i < num_piani; i++) {
+	for (int i = 0; i < num_piani; i++) {
 		piani.push_back(*(new Piano(i,num_posti)));
 	}
 }
@@ -20,15 +20,18 @@ Parcheggio::~Parcheggio() {
 }
 
 std::tuple<int, int>  Parcheggio::occupaPosto() {
-	for (int i = 1; i < piani.size(); i++) {
-		if (piani[i].Piano::sizeofPosti() != 0) {
-			int x = piani[i].Piano::occupaPosto();
-			return std::make_tuple(i, x);
-			break;
+	if (stato == true) {
+		for (int i = 0; i < piani.size(); i++) {
+			if (piani[i].Piano::sizeofPosti() != 0) {
+				int x = piani[i].Piano::occupaPosto();
+				return std::make_tuple(i, x);
+				break;
+			}
+			std::cout << "Parcheggio pieno" << std::endl;
+			throw std::bad_exception();
 		}
-		std::cout << "Parcheggio pieno" << std::endl;
-		return std::make_tuple(NULL,NULL);
-	}
+	}std::cout << "Parcheggio chiuso" << std::endl;
+	throw std::bad_exception();
 }
 
 void Parcheggio::liberaPosto(int num_piano,int num_posto) {
@@ -43,17 +46,27 @@ void Parcheggio::liberaPosto(int num_piano,int num_posto) {
 	}
 }
 
-void Parcheggio::stampaPosti() {
-	for (int i = 1; i < piani.size(); i++) {
-		piani[i].Piano::stampa();
+std::string Parcheggio::stampaPosti() {
+	std::string posti;
+	for (int i = 0; i < piani.size(); i++) {
+		posti += piani[i].Piano::stampa();
 	}
+	return posti;
 }
 
 bool Parcheggio::verificaPosto() {
-	for (int i = 1; i < piani.size(); i++) {
+	for (int i = 0; i < piani.size(); i++) {
 		if (piani[i].Piano::sizeofPosti() != 0) {
 			return true;
 		}
 		return false;
 	}
+}
+
+void Parcheggio::chiudiParcheggio() {
+	stato = false;
+}
+
+void Parcheggio::apriParcheggio() {
+	stato = true;
 }

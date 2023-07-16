@@ -5,15 +5,16 @@
 #include <vector>
 #include <memory>
 
-void Piano::stampa() {
+std::string Piano::stampa() {
 
-	std::cout << "Piano: " << num_piano << ", con posti: " << posti_liberi << std::endl;
+	std::cout << "Piano: " << num_piano << ", con posti: " << posti_liberi << " su "<<std::to_string(posti.size())<< std::endl;
+	return "Piano: " + std::to_string(num_piano+1) + ", con posti: " + std::to_string(posti_liberi) + " su " +std::to_string(posti.size()) +"\n";
 }
 
 Piano::Piano(int n, int m) {
 	num_piano = n;
 	posti_liberi = m;
-	for (int i = 1; i < m; i++) {
+	for (int i = 0; i < m; i++) {
 		posti.push_back(*(new Posto(i)));	
 	}
 }
@@ -26,12 +27,12 @@ Piano::~Piano() {
 
 int Piano::occupaPosto() {
 	if (posti_liberi != 0) {
-		for (int i = 1; i < posti.size(); i++) {
+		for (int i = 0; i < posti.size(); i++) {
 			try {
 				if (posti[i].Posto::getStato() == 1) {
 					posti[i].Posto::occupaPosto();
 					posti_liberi--;
-					std::cout << "Posto n." << i << " occupato!" << std::endl;
+					std::cout << "Posto n." << i + 1 << " occupato!" << std::endl;
 					return i;
 				}
 			}
@@ -49,7 +50,7 @@ int Piano::occupaPosto() {
 void Piano::liberaPosto(int num_posto) {
 	try {
 		posti[num_posto].liberaPosto();
-		std::cout << "Posto n." << num_posto << " liberato!" << std::endl;
+		std::cout << "Posto n." << num_posto + 1 << " liberato!" << std::endl;
 		posti_liberi++;
 	}
 	catch (std::logic_error e) {

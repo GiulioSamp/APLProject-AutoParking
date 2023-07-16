@@ -12,6 +12,8 @@ public:
 	~Parcheggio();
 	std::tuple<int, int> occupaPosto();
 	void liberaPosto(int, int);
-	void stampaPosti();
+	std::string stampaPosti();
 	bool verificaPosto();
+	void chiudiParcheggio();
+	void apriParcheggio();
 };
