@@ -13,8 +13,8 @@ class Menu:
                 self.endpoint.get_occupied_spots_all_floors()
             case 2:
                 self.endpoint.get_occupied_spots_forf()
-            case 3:
-                self.endpoint.other_method2()
+            case 5:
+                self.endpoint.get_gain()
             case _:
                 print("Selezione non valida")
 
@@ -27,7 +27,7 @@ def main():
         print("2. Visualizza posti occupati per piano")
         print("3. Chiudi parcheggio")
         print("4. Apri parcheggio")
-        print("5. Controlla incassi")
+        print("5. Visualizza incasso giornaliero")
         print("6. Crea pacchetto ore")
         print("0. Esci")
 

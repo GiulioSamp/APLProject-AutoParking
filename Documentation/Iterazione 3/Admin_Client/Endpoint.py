@@ -1,6 +1,7 @@
 import requests
 import json
-
+import datetime
+import locale
 #forse meglio nome ServerCommunication?
 class Endpoint:
     def __init__(self, admin_id):
@@ -17,7 +18,7 @@ class Endpoint:
             return response.text  # Restituisci la risposta come stringa di testo
         except requests.exceptions.RequestException as e:
             print("Errore nell'invio della comunicazione al server:", e)
-
+#uc3
     def get_occupied_spots_all_floors(self):
         endpoint = "/spots"
         response = self.data_to_server(endpoint, None)
@@ -25,7 +26,7 @@ class Endpoint:
         if response is not None:
             try:
                 data = json.loads(response)  # la risposta JSON
-                result = data["result"]  # estraggo il campo "result" dalla risposta
+                result = data["result"]  # estraggo il campo {"result":" dalla risposta
                 result = result.strip()  #  eventuali spazi iniziali e finali lstrip()solo iniz
                 result = result.replace('\\n', '\n')  # Sostituisci "\\n" con "\n" per andare a capo nella stampa
                 print("Visualizzazione numero di posti occupati su numero di posti liberi")
@@ -41,7 +42,7 @@ class Endpoint:
         else:
             print("Errore nella richiesta dei posti occupati.")
             # return None
-
+#uc4
     def get_occupied_spots_forf(self):
         endpoint = "/spots"
         response = self.data_to_server(endpoint, None)
@@ -51,8 +52,7 @@ class Endpoint:
                 data = json.loads(response)  # la risposta JSON
                 result = data["result"]  # estraggo il campo "result" dalla risposta
                 result = result.strip()  #  eventuali spazi iniziali e finali lstrip()solo iniz
-                result = result.replace('\\n', '\n')  # Sostituisci "\\n" con "\n" per andare a capo nella stampa
- 
+                result = result.replace('\\n', '\n')  # Sostitu"\\n" con "\n" per andare a capo nella stampa 
                 # Chiedi all'utente di inserire il numero del piano
                 while True:
                     try:
@@ -63,10 +63,7 @@ class Endpoint:
                     except ValueError:
                         print("Errore: Inserisci un numero di piano valido da 1 a 10.")
 
-                # Cerca il valore corrispondente al piano specificato nella risposta
                 piano_stringa = f"Piano: {piano_numero},"
-                #if piano_stringa in result:
-                    # Trovato il piano nella risposta, stampa solo quella parte
                 piano_inizio = result.index(piano_stringa)
                 piano_fine = result.index('\n', piano_inizio)
                 piano_risultato = result[piano_inizio:piano_fine]
@@ -83,6 +80,42 @@ class Endpoint:
                 # return None
  
 
+    def get_gain(self):
+        endpoint = "/gain"
+        response = self.data_to_server(endpoint, None)
+        if response is not None:
+            try:
+                data = json.loads(response)  # Decodifica la risposta JSON
+                if isinstance(data, list) and len(data) > 0:
+                    #inserire l'anno, il mese e il giorno
+                    year = int(input("Inserisci l'anno: "))
+                    month = int(input("Inserisci il mese: "))
+                    day = int(input("Inserisci il giorno: "))
+                    user_date = datetime.date(year, month, day)
+                    locale.setlocale(locale.LC_ALL, "") #formattazione locale ,
+                    print("Importi:")
+                    for profit in data:
+                        if "Data" in profit:
+                            # la parte "aaaa-mm-gg" dal campo "Data" dell'elemento
+                            data_part = profit["Data"].split(" ")[0]
+                            profit_date = datetime.datetime.strptime(data_part, "%Y-%m-%d").date()
+                            if profit_date == user_date:
+                                if "Importo" in profit:
+                                    importo = profit["Importo"]                                    
+                                    importo_formattato = locale.format_string("%.2f", float(importo), grouping=True)
+                                    print(importo_formattato)
+                                    
+                else:
+                    print("La risposta non contiene dati di guadagno.")
+            except json.JSONDecodeError as e:
+                print("Errore nella decodifica della risposta JSON:", e)
+            except ValueError as e:
+                print("Errore: Input non valido.", e)
+            except Exception as e:
+                print("Errore nella gestione della risposta del server:", e)
+        else:
+            print("Errore nella richiesta dei posti occupati.")
+            
            
 
 
@@ -91,7 +124,7 @@ class Endpoint:
 
 
 # Utilizzo dell'oggetto Endpoint
-endpoint_obj = Endpoint(admin_id="Admin12345")
+#endpoint_obj = Endpoint(admin_id="Admin12345")
 #endpoint_obj.data_to_server("/api/endpoint1", {"key": "value"})
     
 
