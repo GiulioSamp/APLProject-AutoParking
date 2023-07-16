@@ -24,10 +24,10 @@ namespace ParkingClient
             Tipo = tipo;
         }
         public VehicleManager(){}
-        public override string ToString()
+       /* public override string ToString()
         {
             return "Targa: " + Targa + "Marca:" + Marca+ "Modello:" + Modello+ "Anno:" + Anno;
-        }
+        } */
         public VehicleManager EnterVehicle(UserManager utente)
          {
             //passo parametro utente che rappresenta il riferimento alla classe UserManager per poter usare check metodo is..

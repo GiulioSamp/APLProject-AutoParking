@@ -173,7 +173,7 @@ namespace ParkingClient
             }
         }
         public void RegisterVehicle(){
-            veicolo.EnterVehicle(utente);
+            veicolo = veicolo.EnterVehicle(utente);
             Validation.SendDataToServer("/vehicle", utente.Email, veicolo);
     }
         public void ModdVehicle()
