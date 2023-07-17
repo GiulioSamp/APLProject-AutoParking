@@ -22,8 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ABCViewGain.py" />
+    <Compile Include="ConcreteViewGain.py" />
     <Compile Include="Endpoint.py" />
-    <Compile Include="Gain.py" />
     <Compile Include="Menu.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
