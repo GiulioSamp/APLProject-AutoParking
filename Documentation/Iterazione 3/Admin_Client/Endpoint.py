@@ -17,7 +17,7 @@ class Endpoint:
             response = requests.post(url, data=payload)
             response.raise_for_status()  # Genera un'eccezione se la richiesta non ha successo
             print("Richiesta inviata al server con successo!")
-            return response.text  # Restituisci la risposta come stringa di testo
+            return response.text  #la risposta come stringa di testo
         except requests.exceptions.RequestException as e:
             print("Errore nell'invio della comunicazione al server:", e)
 #uc3
@@ -71,7 +71,7 @@ class Endpoint:
                 piano_risultato = result[piano_inizio:piano_fine]
                 print(piano_risultato)
                 #else:
-                #print("Il piano specificato non è presente nella risposta.")
+                #print("Il piano specificato non Ã¨ presente nella risposta.")
 
             except json.JSONDecodeError as e:
                 print("Errore nella decodifica della risposta JSON:", e)
@@ -90,7 +90,7 @@ class Endpoint:
             try:
                 data = json.loads(response)  # Decodifica la risposta JSON
                 if isinstance(data, list) and len(data) > 0:
-                    #visualizza_incasso_strategy è un riferimento a istanza di una classe che implementa l'interfaccia AbstractVisualizzaIncasso
+                    #visualizza_incasso_strategy Ã¨ un riferimento a istanza di una classe che implementa l'interfaccia AbstractVisualizzaIncasso
                     self.visualizza_incasso_strategy.visualizza_incasso(data)  # assa 'data' come parametro
                 else:
                     print("La risposta non contiene dati di guadagno.")
