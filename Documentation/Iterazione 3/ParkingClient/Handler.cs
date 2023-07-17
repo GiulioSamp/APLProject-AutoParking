@@ -94,7 +94,7 @@ namespace ParkingClient
 
             Console.Write("Utente registrato, procediamo con la registrazione del veicolo\n");
             veicolo=veicolo.EnterVehicle(utente);
-            Console.WriteLine(veicolo.ToString());
+            //Console.WriteLine(veicolo.ToString());
             Validation.SendDataToServer("/register", oggetto: utente);
             Validation.SendDataToServer("/vehicle", utente.Email, veicolo);
 
