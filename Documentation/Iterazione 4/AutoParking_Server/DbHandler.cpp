@@ -204,8 +204,8 @@ std::string DbHandler::register_park(crow::json::rvalue x, Parcheggio& p) {
                 std::cout << "One row inserted." << endl;
                 return "Successo, Utente: " + (std::string)x["Email"].s() +
                     +"\nveicolo parcheggiato: " + (std::string)x["Targa"].s()
-                    + "\n Piano: " + std::to_string(std::get<0>(places))
-                    + "\n Posto: " + std::to_string(std::get<1>(places))
+                    + "\n Piano: " + std::to_string(std::get<0>(places)+1)
+                    + "\n Posto: " + std::to_string(std::get<1>(places)+1)
                     + "\nid parcheggio per il ritiro: " + std::to_string(get_park_id((std::string)x["Targa"].s()));
             }
             catch (std::bad_exception e) {
