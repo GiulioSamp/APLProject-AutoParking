@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9Cb/MuqF6kbwcj5c47YxQYT82U9cYegTZmax++w+Z9Jv8kyO8Q3btRkvF1uI+7IdC6LjxJJMmAeQ/O2bey9Slw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\auror\\source\\repos\\ParkingClient\\ParkingClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\auror\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
