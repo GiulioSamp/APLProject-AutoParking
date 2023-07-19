@@ -189,32 +189,38 @@ int DbHandler::get_park_id(string targa) {
 std::string DbHandler::register_park(crow::json::rvalue x, Parcheggio& p) {
     res = stmt->executeQuery("SELECT * FROM utente_parcheggiato WHERE targa = '" + (std::string)x["Targa"].s() + "'");
     if (!res->next()) {
-        res = stmt->executeQuery("SELECT id, email, pass FROM utente JOIN veicolo WHERE email = '" + (std::string)x["Email"].s()
-            + "' AND targa = '" + (std::string)x["Targa"].s() + "'");
-        if (res->next()) {
-            try {
-                std::tuple<int, int> places = p.occupaPosto();
-                pstmt = con->prepareStatement("INSERT INTO utente_parcheggiato(n_posto, n_piano, utente, targa, tariffa) VALUES(?,?,?,?,?)");
-                pstmt->setString(1, std::to_string(std::get<1>(places)));
-                pstmt->setString(2, std::to_string(std::get<0>(places)));
-                pstmt->setInt(3, res->getInt(1));
-                pstmt->setString(4, (std::string)x["Targa"].s());
-                pstmt->setInt(5, getRate());
-                pstmt->execute();
-                std::cout << "One row inserted." << endl;
-                return "Successo, Utente: " + (std::string)x["Email"].s() +
-                    +"\nveicolo parcheggiato: " + (std::string)x["Targa"].s()
-                    + "\n Piano: " + std::to_string(std::get<0>(places)+1)
-                    + "\n Posto: " + std::to_string(std::get<1>(places)+1)
-                    + "\nid parcheggio per il ritiro: " + std::to_string(get_park_id((std::string)x["Targa"].s()));
+        res = stmt->executeQuery("SELECT * FROM utente_parcheggiato JOIN utente WHERE email = '" + (std::string)x["Email"].s() + "' AND id = utente");
+        if (!res->next()) {
+            res = stmt->executeQuery("SELECT id, email, pass FROM utente JOIN veicolo WHERE email = '" + (std::string)x["Email"].s()
+                + "' AND targa = '" + (std::string)x["Targa"].s() + "'");
+            if (res->next()) {
+                try {
+                    std::tuple<int, int> places = p.occupaPosto();
+                    pstmt = con->prepareStatement("INSERT INTO utente_parcheggiato(n_posto, n_piano, utente, targa, tariffa) VALUES(?,?,?,?,?)");
+                    pstmt->setString(1, std::to_string(std::get<1>(places)));
+                    pstmt->setString(2, std::to_string(std::get<0>(places)));
+                    pstmt->setInt(3, res->getInt(1));
+                    pstmt->setString(4, (std::string)x["Targa"].s());
+                    pstmt->setInt(5, getRate());
+                    pstmt->execute();
+                    std::cout << "One row inserted." << endl;
+                    return "Successo, Utente: " + (std::string)x["Email"].s() +
+                        +"\nveicolo parcheggiato: " + (std::string)x["Targa"].s()
+                        + "\n Piano: " + std::to_string(std::get<0>(places) + 1)
+                        + "\n Posto: " + std::to_string(std::get<1>(places) + 1)
+                        + "\nid parcheggio per il ritiro: " + std::to_string(get_park_id((std::string)x["Targa"].s()));
+                }
+                catch (std::bad_exception e) {
+                    return "Parcheggio Pieno!";
+                }
             }
-            catch (std::bad_exception e) {
-                return "Parcheggio Pieno!";
+            else {
+                throw std::exception(); //eccezione se nessun veicolo con la targa data è stato trovato
             }
         }
-    else {
-        throw std::exception(); //eccezione se nessun veicolo con la targa data è stato trovato
-    }
+        else {
+            throw std::logic_error("Utente già parcheggiato!");
+        }
     }
     else
     {

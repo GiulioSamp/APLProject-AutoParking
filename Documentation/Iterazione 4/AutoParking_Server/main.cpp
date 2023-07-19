@@ -16,10 +16,10 @@ using namespace std;
 int main()
 {
    crow::SimpleApp app;
-   static DbHandler Db;   //static in quanto la funzione lambda Crow Route non accetta parametri fuori dal suo scope
+   static DbHandler Db;  
    Db.start();
     
-   static Parcheggio Park(NUMERO_PIANI, NUMERO_POSTI); //static in quanto la funzione lambda Crow Route non accetta parametri fuori dal suo scope
+   static Parcheggio Park(NUMERO_PIANI, NUMERO_POSTI); 
    //UTENTE
     CROW_ROUTE(app, "/register").methods("POST"_method)  //Endpoint di registrazione utente
         ([](const crow::request& req) {
@@ -123,6 +123,9 @@ int main()
         }
         catch (exception e) {
             return crow::response(400, "Targa non trovata o Utente non riconosciuto");
+        }
+        catch (logic_error e) {
+            return crow::response(400, e.what());
         }
             });
 
