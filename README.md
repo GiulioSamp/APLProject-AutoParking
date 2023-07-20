@@ -1,4 +1,4 @@
-# APLProject-AutoParking
+# Project-AutoParking
 AutoParking is an application for managing automated multi-floor parking systems, the application is split into 3 major components:
 
 a C# Client for using the service and park your car
